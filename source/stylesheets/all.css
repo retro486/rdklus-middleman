@@ -3,3 +3,9 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
+
+footer {
+  text-align: center;
+  font-size: .8em;
+  padding: 1em;
+}

@@ -1,4 +1,10 @@
 .row
-    .col-md-12
-        %h1 Rdkl.us
-        %p Coming soon...
+  .col-md-12
+    %h1 Rdkl.us
+    %p Some cleanup will be coming here soon as I recover my blog. In the meantime, here are my previous blog entires:
+    %ul
+      - data.blogs.old_blogs.reverse.each do |blog|
+        - next unless blog[9] == 'published'
+        %li
+          = Time.at(blog[14].to_i / 1000).strftime('%B %-d, %Y')
+          = link_to blog[2], "#{blog[3]}.html"
