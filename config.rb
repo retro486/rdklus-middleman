@@ -71,6 +71,13 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 end
 
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true, :smartypants => true
+
 data.blogs.old_blogs.each do |blog|
-  proxy "/#{blog[3]}.html", "/blog_template.html", locals: {blog: blog}, ignore: true
+  proxy "/#{blog[3]}.html", "/old_blog_template.html", locals: {blog: blog}, ignore: true
+end
+
+data.new_blogs.blogs.each do |blog|
+  proxy "/#{blog['slug']}.html", "/blog_template.html", locals: {blog: blog}, ignore: true
 end

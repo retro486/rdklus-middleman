@@ -1,0 +1,16 @@
+blogs:
+  - title: "Project Fi On A Non-Fi Phone"
+    published: false
+    date: "2016-05-15"
+    slug: project-fi-on-a-non-fi-phone
+    entry: |
+      Did you know you can use a Project Fi SIM on any GSM phone? I've heard whispers
+      that you can also do it on CDMA networks that use SIMs, but I haven't tried that myself.
+      
+      I've tried using my main SIM in a Nextbit Robin and while it generally worked very, very well,
+      it (obviously) doesn't work any different than a normal phone. Meaning, if I wasn't getting cell
+      service, I wasn't getting anything.
+      
+      Enter the data-only SIM and Google Hangouts.
+      
+     

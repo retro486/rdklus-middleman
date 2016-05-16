@@ -3,6 +3,12 @@
     %h1 Rdkl.us
     %p Some cleanup will be coming here soon as I recover my blog. In the meantime, here are my previous blog entires:
     %ul
+      - data.new_blogs.blogs.each do |blog|
+        - next unless blog['published']
+        %li
+          = Date.parse(blog['date']).strftime('%B %-d, %Y')
+          = link_to blog['title'], "#{blog['slug']}.html"
+          
       - data.blogs.old_blogs.reverse.each do |blog|
         - next unless blog[9] == 'published'
         %li

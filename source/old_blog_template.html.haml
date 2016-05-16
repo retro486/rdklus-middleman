@@ -4,10 +4,9 @@
         
 .row
   .col-md-12
-    %h1= blog['title']
+    %h1= blog[2]
 
 
 .row
   .col-md-12
-    :markdown
-      #{blog['entry']}
+    = blog[5]
