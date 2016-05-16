@@ -65,8 +65,12 @@ configure :build do
   # activate :asset_hash
 
   # Use relative URLs
-  # activate :relative_assets
+  activate :relative_assets
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
+end
+
+data.blogs.old_blogs.each do |blog|
+  proxy "/#{blog[3]}.html", "/blog_template.html", locals: {blog: blog}, ignore: true
 end

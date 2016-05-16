@@ -1,0 +1,2222 @@
+old_blogs:
+  - - '2'
+    - c9114d8d-8058-4876-a22e-fa0c04af93cd
+    - Brief Android View Lessons
+    - brief-android-dev-lessons
+    - |-
+      Just quick notes on things I’ve learned as roadblocks.
+
+      Large XML files are VERY slow on Android; Very quickly I learned downloading and parsing large (1mb+) XML files takes an unacceptable amount on time. There are a few tricks I employed to speed it up:
+
+        * Always use SAX-style processing, NEVER use XPath/DOM-style parsing.
+        * Keep objects shallow… too many maps of lists of maps eats up a lot of ram and speed.
+        * JSON parses slightly faster than SAX but only slightly and it’s not worth converting XML to JSON but JSON serializes easier so use JSON instead of XML when you need to serialize something. Add a toJSON() method and use simple-json on custom objects.
+        * To be tested: preload XML data into a SQLite database and make use of caching/limited data pull if at all possible.
+
+      Show the activity view ASAP and schedule processing/data loading in an AsyncTask
+      Be liberal about passing the current activity around and make use of getActivity() when in Fragments to allow for background loading of data.
+
+      ### Benefits of Fragments and loops:
+
+        * Structurally simpler
+        * Fewer classes required
+        * Easier to follow in code
+        * Easier to maintain
+        * Easier to preview in layout viewer
+        * Highly customizable and easy to style
+
+      ### Benefits of ListViews with Fragments and Adapters:
+
+        * Android style - recommended by Google
+        * Fast
+        * Includes easy methods to hook into events like on click
+        * Easier to implement a tabbed/button view
+
+      Examples of each case will follow soon...
+
+      References:
+      http://developer.android.com/guide/topics/ui/binding.html
+    - |-
+      <p>Just quick notes on things I’ve learned as roadblocks.</p>
+
+      <p>Large XML files are VERY slow on Android; Very quickly I learned downloading and parsing large (1mb+) XML files takes an unacceptable amount on time. There are a few tricks I employed to speed it up:</p>
+
+      <ul>
+      <li>Always use SAX-style processing, NEVER use XPath/DOM-style parsing.</li>
+      <li>Keep objects shallow… too many maps of lists of maps eats up a lot of ram and speed.</li>
+      <li>JSON parses slightly faster than SAX but only slightly and it’s not worth converting XML to JSON but JSON serializes easier so use JSON instead of XML when you need to serialize something. Add a toJSON() method and use simple-json on custom objects.</li>
+      <li>To be tested: preload XML data into a SQLite database and make use of caching/limited data pull if at all possible.</li>
+      </ul>
+
+      <p>Show the activity view ASAP and schedule processing/data loading in an AsyncTask <br />
+      Be liberal about passing the current activity around and make use of getActivity() when in Fragments to allow for background loading of data.</p>
+
+      <h3 id="benefitsoffragmentsandloops">Benefits of Fragments and loops:</h3>
+
+      <ul>
+      <li>Structurally simpler</li>
+      <li>Fewer classes required</li>
+      <li>Easier to follow in code</li>
+      <li>Easier to maintain</li>
+      <li>Easier to preview in layout viewer</li>
+      <li>Highly customizable and easy to style</li>
+      </ul>
+
+      <h3 id="benefitsoflistviewswithfragmentsandadapters">Benefits of ListViews with Fragments and Adapters:</h3>
+
+      <ul>
+      <li>Android style - recommended by Google</li>
+      <li>Fast</li>
+      <li>Includes easy methods to hook into events like on click</li>
+      <li>Easier to implement a tabbed/button view</li>
+      </ul>
+
+      <p>Examples of each case will follow soon...</p>
+
+      <p>References: <br />
+      <a href='http://developer.android.com/guide/topics/ui/binding.html'>http://developer.android.com/guide/topics/ui/binding.html</a></p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1401502642555'
+    - '1'
+    - '1402029224095'
+    - '1'
+    - '1402029208825'
+    - '1'
+  - - '4'
+    - 5b10669f-6f08-4b98-b323-d0242bd0465c
+    - Preload Large Data on Android
+    - preload-large-data-on-android
+    - "TODO \n\nReferences\nhttp://stackoverflow.com/questions/2860157/load-files-bigger-than-1m-from-assets-folder"
+    - |-
+      <p>TODO </p>
+
+      <p>References <br />
+      <a href='http://stackoverflow.com/questions/2860157/load-files-bigger-than-1m-from-assets-folder'>http://stackoverflow.com/questions/2860157/load-files-bigger-than-1m-from-assets-folder</a></p>
+    - 
+    - '0'
+    - '0'
+    - draft
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1401502727326'
+    - '1'
+    - '1401502727326'
+    - '1'
+    - 
+    - 
+  - - '5'
+    - 5908528c-0ac3-4ba0-abf2-52bc492c3c68
+    - Google-Free Android
+    - google-free-android
+    - |
+      How hard would it be to function without any Google-branded software on a copy of [Cyanogenmod](http://cyanogenmod.org)? Not very hard, but there are some caveats:
+
+      * **No good maps.** Sorry MapQuest, Google stands alone on good maps and navigation.
+      * **Some modern apps rely on Google Services.** Not a huge deal since there are usually alternatives but still annoying.
+      * **Limited app availablility.** Third-party app stores do a decent job, but no one has Google's massive collection.
+      * **Various content stores separated.** No more Google means no more Google Play, so no one-stop-shop for movies, music, apps, and all the other offerings of Google Play.
+
+      There are three major components to replace:
+
+      0. Google Mail
+      0. Google Productivity (Calendar/Docs/Drive)
+      0. Google Play
+
+      ### Replacing Google Mail, Calendar, and Docs
+      If you're already hooked into an "enterprise" mail system, such as Exchange, then you're all set on replacing mail and calendar. If not, then [Zoho](http://zoho.com) has a fantastic offering and their email and calendar features function exactly like an Exchange servernand don't require any special software on vanilla Android to work as expected.
+
+      ### Replacing Google Drive
+      [Dropbox](https://www.dropbox.com) and [Zoho](http://zoho.com). Zoho supports live sync with Dropbox and stores your documents as Microsoft Office formats (DOCX, PPTX, XLSX) so you can use any Dropbox-enabled editor to read and modify them. Plus you get 2 gigs free at Dropbox and a variety of different ways to expand for free to a small degree or just pay for the extra space if you're using it that much. Zoho used to fall short of a lot of Google Docs features like autosaving and a clean interface but they've made a lot of improvements recently so they're worth another look if you've already dismissed them.
+
+      ### Replacing Google Play
+      This one is a two-parter and is very Amazon.com-centric. Amazon.com provides both an easy-to-install app store and provides apps for music (Amazon MP3) and books (Kindle). Only their Amazon Prime app remains a Kindle tablet-specific offering, but apps are available for Netflix and Hulu Plus. Hopefully Amazon will release Amazon Prime for general Android some day.
+
+      Amazon's app store has a fairly limited offering and requires you to enable unknown sources in your security settings, but such is the cost for cutting the Google cord. However, they make up for it (at least in my opinion) by offering a free paid app every day and frequently offering free Amazon coins by trying free and paid apps, which can be used to purchase more apps. Plus, many of the available apps include partial refunds in the form of Amazon coins so your buying power goes even further. I've been hovering between 500 and 1,000 coins (worth $5 and $10, respectively) for the past few days without spending any of my own cash.
+
+      ### Other Apps
+      There are a few other random apps that aren't available unless you use Google Play.
+
+      * **Google Authenticator** There's an open-source version that does exactly the same thing called [OTP Authenticator](https://github.com/kaie/otp-authenticator-android) and binary APKs are available to download. If you don't trust it, it's open-source so vet the code yourself then compile it.
+      * **Google Hangouts** Now that Google has dropped XMPP support, there's not really any replacement for this other than to switch to a different chat platform. I chose Skype since it's still very popular and many people have it.
+      * **Google Music All Access** Spotify is much better anyway, in my opinion. Or use Pandora if you like, but Pandora doesn't let you listen to specific songs/albums/artists.
+
+      To wrap things up I'll give a quick shoutout to [Humble Bundle](http://asdf) where sometimes they have Android bundles for as low as $5 and you get excellent, DRM-free (meaning you can copy them to as many devices as you own) games. They also have a nice little app for downloading and installing all your purchases. Purchases still have to be made online though, no app store from them... yet... And don't forget to create an account first so your game purchase history is saved automatically.
+
+      ## Sources
+      * http://alternativeto.net/?platform=android
+      * https://www.humblebundle.com/
+    - |-
+      <p>How hard would it be to function without any Google-branded software on a copy of <a href="http://cyanogenmod.org">Cyanogenmod</a>? Not very hard, but there are some caveats:</p>
+
+      <ul>
+      <li><strong>No good maps.</strong> Sorry MapQuest, Google stands alone on good maps and navigation.</li>
+      <li><strong>Some modern apps rely on Google Services.</strong> Not a huge deal since there are usually alternatives but still annoying.</li>
+      <li><strong>Limited app availablility.</strong> Third-party app stores do a decent job, but no one has Google's massive collection.</li>
+      <li><strong>Various content stores separated.</strong> No more Google means no more Google Play, so no one-stop-shop for movies, music, apps, and all the other offerings of Google Play.</li>
+      </ul>
+
+      <p>There are three major components to replace:</p>
+
+      <ol>
+      <li>Google Mail  </li>
+      <li>Google Productivity (Calendar/Docs/Drive)  </li>
+      <li>Google Play</li>
+      </ol>
+
+      <h3 id="replacinggooglemailcalendaranddocs">Replacing Google Mail, Calendar, and Docs</h3>
+
+      <p>If you're already hooked into an "enterprise" mail system, such as Exchange, then you're all set on replacing mail and calendar. If not, then <a href="http://zoho.com">Zoho</a> has a fantastic offering and their email and calendar features function exactly like an Exchange servernand don't require any special software on vanilla Android to work as expected.</p>
+
+      <h3 id="replacinggoogledrive">Replacing Google Drive</h3>
+
+      <p><a href="https://www.dropbox.com">Dropbox</a> and <a href="http://zoho.com">Zoho</a>. Zoho supports live sync with Dropbox and stores your documents as Microsoft Office formats (DOCX, PPTX, XLSX) so you can use any Dropbox-enabled editor to read and modify them. Plus you get 2 gigs free at Dropbox and a variety of different ways to expand for free to a small degree or just pay for the extra space if you're using it that much. Zoho used to fall short of a lot of Google Docs features like autosaving and a clean interface but they've made a lot of improvements recently so they're worth another look if you've already dismissed them.</p>
+
+      <h3 id="replacinggoogleplay">Replacing Google Play</h3>
+
+      <p>This one is a two-parter and is very Amazon.com-centric. Amazon.com provides both an easy-to-install app store and provides apps for music (Amazon MP3) and books (Kindle). Only their Amazon Prime app remains a Kindle tablet-specific offering, but apps are available for Netflix and Hulu Plus. Hopefully Amazon will release Amazon Prime for general Android some day.</p>
+
+      <p>Amazon's app store has a fairly limited offering and requires you to enable unknown sources in your security settings, but such is the cost for cutting the Google cord. However, they make up for it (at least in my opinion) by offering a free paid app every day and frequently offering free Amazon coins by trying free and paid apps, which can be used to purchase more apps. Plus, many of the available apps include partial refunds in the form of Amazon coins so your buying power goes even further. I've been hovering between 500 and 1,000 coins (worth $5 and $10, respectively) for the past few days without spending any of my own cash.</p>
+
+      <h3 id="otherapps">Other Apps</h3>
+
+      <p>There are a few other random apps that aren't available unless you use Google Play.</p>
+
+      <ul>
+      <li><strong>Google Authenticator</strong> There's an open-source version that does exactly the same thing called <a href="https://github.com/kaie/otp-authenticator-android">OTP Authenticator</a> and binary APKs are available to download. If you don't trust it, it's open-source so vet the code yourself then compile it.</li>
+      <li><strong>Google Hangouts</strong> Now that Google has dropped XMPP support, there's not really any replacement for this other than to switch to a different chat platform. I chose Skype since it's still very popular and many people have it.</li>
+      <li><strong>Google Music All Access</strong> Spotify is much better anyway, in my opinion. Or use Pandora if you like, but Pandora doesn't let you listen to specific songs/albums/artists.</li>
+      </ul>
+
+      <p>To wrap things up I'll give a quick shoutout to <a href="http://asdf">Humble Bundle</a> where sometimes they have Android bundles for as low as $5 and you get excellent, DRM-free (meaning you can copy them to as many devices as you own) games. They also have a nice little app for downloading and installing all your purchases. Purchases still have to be made online though, no app store from them... yet... And don't forget to create an account first so your game purchase history is saved automatically.</p>
+
+      <h2 id="sources">Sources</h2>
+
+      <ul>
+      <li><a href='http://alternativeto.net/?platform=android'>http://alternativeto.net/?platform=android</a></li>
+      <li><a href='https://www.humblebundle.com/'>https://www.humblebundle.com/</a></li>
+      </ul>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1401503795328'
+    - '1'
+    - '1401554327101'
+    - '1'
+    - '1401554327103'
+    - '1'
+  - - '6'
+    - 8d1d40d5-7f9c-4052-a653-cdbeee43e1f2
+    - Communication is King
+    - communication-is-king
+    - |-
+      Recently I was asked to compile the number of hours I had spent on a small but fairly complex mobile app. In fact, I had written two apps: a native Android app and a responsive web app. Why? Miscommunication.
+
+      When I was initially given he specs from the client, it sounded like a fairly robust native app. It was assumed it would have to be native to support NFC badges and fancy maps. It would also have to make use of an existing XML API for specific data and pull from another web app for other data. It would also allow for session management.
+
+      Normally, my projects are based on rapid development tools, such as Ruby, Rails, and JavaScript. This project was to be written in Java. Java by itself is easy enough, but once you introduce libraries (Android) it gets much more complex and is by no means a rapid development tool.
+
+      Going into the project I was expecting to make use of concepts such as fragments, preloading data from a local SQLite database, forcing built-in Android standards to break to match designs, and other time-consuming activities. Two and a half weeks in and I had everything except session management done and I was two days away from missing my deadline. I wasn't going to make it and I was flipping out.
+
+      I met with my boss and my project manager to discuss the issue. I needed more time but we didn't have any. We revisited the client and gave them the bad news. She said "well just get rid of NFC then. We didn't know it would be that hard." I wanted to flip the table.
+
+      See, we already developed a full Rails app that does all this, including maps and session management. Turns out, the only real requirement the client had was to make use of NFC hardware on existing tablets. No offline mode, no over complex maps, nothing else unique. I spun up a clone of the Rails app and styled it in a day and a half. The client was happy with it.
+
+      I wasted two and a half weeks on a "nice to have". Why? Miscommunication.
+
+      We should have recognized a native app would take a lot longer than skinning an existing web app and dug a little deeper into the requirements so we might have recognized the potential waste of time for a feature than in the end no one needed.
+
+      Don't guess. Clarify.
+    - |-
+      <p>Recently I was asked to compile the number of hours I had spent on a small but fairly complex mobile app. In fact, I had written two apps: a native Android app and a responsive web app. Why? Miscommunication.</p>
+
+      <p>When I was initially given he specs from the client, it sounded like a fairly robust native app. It was assumed it would have to be native to support NFC badges and fancy maps. It would also have to make use of an existing XML API for specific data and pull from another web app for other data. It would also allow for session management.</p>
+
+      <p>Normally, my projects are based on rapid development tools, such as Ruby, Rails, and JavaScript. This project was to be written in Java. Java by itself is easy enough, but once you introduce libraries (Android) it gets much more complex and is by no means a rapid development tool.</p>
+
+      <p>Going into the project I was expecting to make use of concepts such as fragments, preloading data from a local SQLite database, forcing built-in Android standards to break to match designs, and other time-consuming activities. Two and a half weeks in and I had everything except session management done and I was two days away from missing my deadline. I wasn't going to make it and I was flipping out.</p>
+
+      <p>I met with my boss and my project manager to discuss the issue. I needed more time but we didn't have any. We revisited the client and gave them the bad news. She said "well just get rid of NFC then. We didn't know it would be that hard." I wanted to flip the table.</p>
+
+      <p>See, we already developed a full Rails app that does all this, including maps and session management. Turns out, the only real requirement the client had was to make use of NFC hardware on existing tablets. No offline mode, no over complex maps, nothing else unique. I spun up a clone of the Rails app and styled it in a day and a half. The client was happy with it.</p>
+
+      <p>I wasted two and a half weeks on a "nice to have". Why? Miscommunication.</p>
+
+      <p>We should have recognized a native app would take a lot longer than skinning an existing web app and dug a little deeper into the requirements so we might have recognized the potential waste of time for a feature than in the end no one needed.</p>
+
+      <p>Don't guess. Clarify.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1402032645256'
+    - '1'
+    - '1402289777787'
+    - '1'
+    - '1402289777788'
+    - '1'
+  - - '7'
+    - fef71325-b3ca-40ec-922b-6a3494e50763
+    - OTP - One Time Passwords
+    - otp-one-time-passwords
+    - |-
+      ### Overview
+      OTP is gaining popularity recently, and when used in conjunction with a username and password, forms 2-factor authentication which is vastly more secure than just username/password alone.
+
+      ### Server Component
+      It's easy to implement with the many libraries available these days:
+
+      1. **Go:** https://github.com/jstoja/go-otp-server/blob/master/otp/otp.go
+      1. **Ruby:** https://github.com/mdp/rotp
+      1. **Python:** https://github.com/nathforge/pyotp (or Django-specific: https://pypi.python.org/pypi/django-otp)
+      1. **C#:** https://code.google.com/p/otpnet/source/browse/otpnet/OTP/OTP.cs
+      1. **PHP:** Don’t use php. It’s bad for your health.
+      1. Fancy all-in-one with tools and stuff: http://www.linotp.org/
+
+      ### "Clients"
+      An app is available on all platforms to generate OTP values for use with a server:
+
+      1. **Android:** Google Authenticator or the open source version: https://github.com/kaie/otp-authenticator-android
+      1. **Windows Phone 8:** Authenticator (by Microsoft)
+      1. **iOS:** Google Authenticator (at least until Apple releases their own)
+      1. **OS X:** SecureAuth OTP: https://itunes.apple.com/us/app/secureauth-otp/id723891185?mt=12
+      1. **Windows:** Not sure, didn't find any after a *very* brief search.
+      1. **Linux:** Not sure, didn't find any after a *very* brief search.
+
+      ### Basic Idea
+      In case you've never heard of OTP:
+
+      1. Pick a shared secret Base32 encoded key (you can use http://online-calculators.appspot.com/base32/ to generate one)
+      1. Put it in a config file somewhere safe where only the server process (and root/you) has access to it
+      1. Prompt for a value
+      1. User enters the shared secret into their OTP app to generate a numeric value
+      1. User enters the generated numeric value and your app validates it by comparing it to the currently generated numeric value
+      1. If they match, they’re authenticated. If not, they’re not.
+
+      I'm working on a Go asset repository service that will make use of OTP and will post a blog entry and source once it's done.
+    - |-
+      <h3 id="overview">Overview</h3>
+
+      <p>OTP is gaining popularity recently, and when used in conjunction with a username and password, forms 2-factor authentication which is vastly more secure than just username/password alone.</p>
+
+      <h3 id="servercomponent">Server Component</h3>
+
+      <p>It's easy to implement with the many libraries available these days:</p>
+
+      <ol>
+      <li><strong>Go:</strong> <a href='https://github.com/jstoja/go-otp-server/blob/master/otp/otp.go'>https://github.com/jstoja/go-otp-server/blob/master/otp/otp.go</a>  </li>
+      <li><strong>Ruby:</strong> <a href='https://github.com/mdp/rotp'>https://github.com/mdp/rotp</a>  </li>
+      <li><strong>Python:</strong> <a href='https://github.com/nathforge/pyotp'>https://github.com/nathforge/pyotp</a> (or Django-specific: <a href='https://pypi.python.org/pypi/django-otp'>https://pypi.python.org/pypi/django-otp</a>)  </li>
+      <li><strong>C#:</strong> <a href='https://code.google.com/p/otpnet/source/browse/otpnet/OTP/OTP.cs'>https://code.google.com/p/otpnet/source/browse/otpnet/OTP/OTP.cs</a>  </li>
+      <li><strong>PHP:</strong> Don’t use php. It’s bad for your health.  </li>
+      <li>Fancy all-in-one with tools and stuff: <a href='http://www.linotp.org/'>http://www.linotp.org/</a></li>
+      </ol>
+
+      <h3 id="clients">"Clients"</h3>
+
+      <p>An app is available on all platforms to generate OTP values for use with a server:</p>
+
+      <ol>
+      <li><strong>Android:</strong> Google Authenticator or the open source version: <a href='https://github.com/kaie/otp-authenticator-android'>https://github.com/kaie/otp-authenticator-android</a>  </li>
+      <li><strong>Windows Phone 8:</strong> Authenticator (by Microsoft)  </li>
+      <li><strong>iOS:</strong> Google Authenticator (at least until Apple releases their own)  </li>
+      <li><strong>OS X:</strong> SecureAuth OTP: <a href='https://itunes.apple.com/us/app/secureauth-otp/id723891185?mt=12'>https://itunes.apple.com/us/app/secureauth-otp/id723891185?mt=12</a>  </li>
+      <li><strong>Windows:</strong> Not sure, didn't find any after a <em>very</em> brief search.  </li>
+      <li><strong>Linux:</strong> Not sure, didn't find any after a <em>very</em> brief search.</li>
+      </ol>
+
+      <h3 id="basicidea">Basic Idea</h3>
+
+      <p>In case you've never heard of OTP:</p>
+
+      <ol>
+      <li>Pick a shared secret Base32 encoded key (you can use <a href='http://online-calculators.appspot.com/base32/'>http://online-calculators.appspot.com/base32/</a> to generate one)  </li>
+      <li>Put it in a config file somewhere safe where only the server process (and root/you) has access to it  </li>
+      <li>Prompt for a value  </li>
+      <li>User enters the shared secret into their OTP app to generate a numeric value  </li>
+      <li>User enters the generated numeric value and your app validates it by comparing it to the currently generated numeric value  </li>
+      <li>If they match, they’re authenticated. If not, they’re not.</li>
+      </ol>
+
+      <p>I'm working on a Go asset repository service that will make use of OTP and will post a blog entry and source once it's done.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1402545429082'
+    - '1'
+    - '1402582435406'
+    - '1'
+    - '1402582435408'
+    - '1'
+  - - '8'
+    - 718baef0-39f4-43c0-bb93-70a4215708d8
+    - Generate OFT Files from HTML with Mono.NET
+    - generate-oft-files-from-html-with-mono-net
+    - |-
+      # Why?
+      Because it seems to be a very heavily requested feature that honestly should die already. Plus I hate using a Windows VM and a full copy of Office just to work on such a tedious component of an already tedious process.
+
+      # How?
+      Thankfully some people in the Mono community have done all the hard work of putting together a MCDF (Microsoft Compound Document File) parser and making it vanilla Mono.NET compatible. Plus some very easy API and excellent example code.
+
+      Compiled on OS X just fine and seems to do what I was expecting, so no Microsoft DLL requirements or anything beyond the Mono runtime (MRE, not MDK): http://www.go-mono.com/mono-downloads/download.html
+
+      # Who?
+      * http://stackoverflow.com/questions/7957827/is-there-a-difference-between-the-outlook-msg-and-oft-file-formats
+      * http://sourceforge.net/projects/openmcdf/
+      * http://www.openoffice.org/sc/compdocfileformat.pdf
+
+      # Where?
+      https://github.com/retro486/html2oft
+
+      ## Caveats
+      I am inexperienced in Mono and very rusty in my C#, so while my implementation is very simple, it is very much untested (especially while I'm on vacation) and may not be the most concise way to handle the streams.
+
+      Also, I've yet to actually test it in a copy of Outlook 2k7 to confirm that the file generated is as expected, so this may not even work at all.
+    - |-
+      <h1 id="why">Why?</h1>
+
+      <p>Because it seems to be a very heavily requested feature that honestly should die already. Plus I hate using a Windows VM and a full copy of Office just to work on such a tedious component of an already tedious process.</p>
+
+      <h1 id="how">How?</h1>
+
+      <p>Thankfully some people in the Mono community have done all the hard work of putting together a MCDF (Microsoft Compound Document File) parser and making it vanilla Mono.NET compatible. Plus some very easy API and excellent example code.</p>
+
+      <p>Compiled on OS X just fine and seems to do what I was expecting, so no Microsoft DLL requirements or anything beyond the Mono runtime (MRE, not MDK): <a href='http://www.go-mono.com/mono-downloads/download.html'>http://www.go-mono.com/mono-downloads/download.html</a></p>
+
+      <h1 id="who">Who?</h1>
+
+      <ul>
+      <li><a href='http://stackoverflow.com/questions/7957827/is-there-a-difference-between-the-outlook-msg-and-oft-file-formats'>http://stackoverflow.com/questions/7957827/is-there-a-difference-between-the-outlook-msg-and-oft-file-formats</a></li>
+      <li><a href='http://sourceforge.net/projects/openmcdf/'>http://sourceforge.net/projects/openmcdf/</a></li>
+      <li><a href='http://www.openoffice.org/sc/compdocfileformat.pdf'>http://www.openoffice.org/sc/compdocfileformat.pdf</a></li>
+      </ul>
+
+      <h1 id="where">Where?</h1>
+
+      <p><a href='https://github.com/retro486/html2oft'>https://github.com/retro486/html2oft</a></p>
+
+      <h2 id="caveats">Caveats</h2>
+
+      <p>I am inexperienced in Mono and very rusty in my C#, so while my implementation is very simple, it is very much untested (especially while I'm on vacation) and may not be the most concise way to handle the streams.</p>
+
+      <p>Also, I've yet to actually test it in a copy of Outlook 2k7 to confirm that the file generated is as expected, so this may not even work at all.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1403941139683'
+    - '1'
+    - '1403941139683'
+    - '1'
+    - '1403941139689'
+    - '1'
+  - - '9'
+    - a8b5f7cb-b662-4bda-95b7-5e688b089eaa
+    - 'Follow-up: Generate OFT Files from HTML with Mono.NET'
+    - follow-up-generate-oft-files-from-html-with-mono-net
+    - "Well, it's been a few days' worth of effort put into this and I've so far uncovered
+      more random, seemingly undocumented behavior of Outlook 2007, MAPI, and the MCDF
+      format.\n\nI have been unsuccessful in getting HTML to properly render in Outlook
+      when building an OFT and injecting HTML. Instead, I get a blank message and using
+      OutlookSpy I can confirm that Body and HTMLBody are both blank.\n\nHowever, when
+      I add a fairly large RTF document as the HTML source, I get a plaintext copy of
+      all the RTF code, so the fields are correct but Outlook refuses to render anything
+      contained in HTML tags.\n\nInspecting existing (manually created) OFT files show
+      that in fact Outlook doesn't define the HTML body field in the file itself. Instead
+      it only defines plaintext and compressed RTF fields, where the compressed RTF
+      is RTF-encoded HTML compressed with some custom LZ-based algorithm.\n\nFor example:\n```\n<html>\n<body>\n<h1>Title
+      Here</h1>\n<p>Simple HTML test.</p>\n</body>\n</html>\n```\n\nIs converted by
+      Outlook to RTF (extracted with MFCMAPI):\n```\n{\\rtf1\\ansi\\ansicpg1252\\fromhtml1
+      \\fbidis \\deff0{\\fonttbl\n{\\f0\\fswiss Arial;}\n{\\f1\\fmodern Courier New;}\n{\\f2\\fnil\\fcharset2
+      Symbol;}\n{\\f3\\fmodern\\fcharset0 Courier New;}}\n{\\colortbl\\red0\\green0\\blue0;\\red0\\green0\\blue255;}\n\\uc1\\pard\\plain\\deftab360
+      \\f0\\fs24 \n{\\*\\htmltag19 <html>}\n{\\*\\htmltag2 \\par }\n{\\*\\htmltag50
+      <body>}\n{\\*\\htmltag0 \\par }\n{\\*\\htmltag64 <h1>}\\htmlrtf {\\fs48 \\par\\b
+      \\htmlrtf0 \\htmlrtf {\\htmlrtf0 \\htmlrtf {\\fs48 \\htmlrtf0 Title Here\\htmlrtf
+      }\\htmlrtf0 \\htmlrtf\\par}\\htmlrtf0\n\\htmlrtf \\par }\\htmlrtf0 \n{\\*\\htmltag72
+      </h1>}\n{\\*\\htmltag0 \\par }\n{\\*\\htmltag64 <p>}\\htmlrtf \\par\n\\htmlrtf0
+      \\htmlrtf {\\htmlrtf0 Simple HTML test.\\htmlrtf\\par}\\htmlrtf0\n\\htmlrtf \\par\n\\htmlrtf0
+      \n{\\*\\htmltag72 </p>}\n{\\*\\htmltag0 \\par }{\\*\\htmltag64}\\htmlrtf {\\htmlrtf0
+      \n{\\fldrslt\\cf1\\ul }}\\htmlrtf0 {\\*\\htmltag72}\\htmlrtf\\par}\\htmlrtf0\n\n{\\*\\htmltag58
+      </body>}\n{\\*\\htmltag2 \\par }\n{\\*\\htmltag27 </html>}}\n```\n\nEpic facepalm
+      right there. That's uncompressed as well, so not only would I have to implement
+      a HTML to RTFHTML library, but then I'd have to fix the LZ compression library
+      I started to actually work as Outlook expects.\n\nWorth it? Nope.\n\nAs far as
+      I can tell, there is no legitimate reason for OFT to be part of an EDM delivery
+      other than clients being cheap and not using a proper EDM management solution
+      (almost all of which support plain HTML templates).\n\nI've left my code up on
+      Github for any brave souls who really want to continue the work, but it really
+      is more trouble than it's worth and they \"why\" for delivering OFT files should
+      very much be revisited and clients educated.\n\n## Sources\n\nIn no particular
+      order:\n\n* http://support.microsoft.com/kb/268440\n* http://msdn.microsoft.com/en-us/library/ee159831%28v=exchg.80%29.aspx\n*
+      http://msdn.microsoft.com/en-us/library/bb446140.aspx\n* http://msdn.microsoft.com/en-us/library/cc463890%28v=exchg.80%29.aspx\n*
+      http://blogs.msdn.com/b/openspecification/archive/2009/11/06/msg-file-format-part-1.aspx\n*
+      http://www.dimastr.com/outspy/home.htm\n* https://mfcmapi.codeplex.com/\n* https://github.com/retro486/html2oft\n\n"
+    - "<p>Well, it's been a few days' worth of effort put into this and I've so far
+      uncovered more random, seemingly undocumented behavior of Outlook 2007, MAPI,
+      and the MCDF format.</p>\n\n<p>I have been unsuccessful in getting HTML to properly
+      render in Outlook when building an OFT and injecting HTML. Instead, I get a blank
+      message and using OutlookSpy I can confirm that Body and HTMLBody are both blank.</p>\n\n<p>However,
+      when I add a fairly large RTF document as the HTML source, I get a plaintext copy
+      of all the RTF code, so the fields are correct but Outlook refuses to render anything
+      contained in HTML tags.</p>\n\n<p>Inspecting existing (manually created) OFT files
+      show that in fact Outlook doesn't define the HTML body field in the file itself.
+      Instead it only defines plaintext and compressed RTF fields, where the compressed
+      RTF is RTF-encoded HTML compressed with some custom LZ-based algorithm.</p>\n\n<p>For
+      example:  </p>\n\n<pre><code>&lt;html&gt;  \n&lt;body&gt;  \n&lt;h1&gt;Title Here&lt;/h1&gt;
+      \ \n&lt;p&gt;Simple HTML test.&lt;/p&gt;  \n&lt;/body&gt;  \n&lt;/html&gt;  \n</code></pre>\n\n<p>Is
+      converted by Outlook to RTF (extracted with MFCMAPI):  </p>\n\n<pre><code>{\\rtf1\\ansi\\ansicpg1252\\fromhtml1
+      \\fbidis \\deff0{\\fonttbl\n{\\f0\\fswiss Arial;}\n{\\f1\\fmodern Courier New;}\n{\\f2\\fnil\\fcharset2
+      Symbol;}\n{\\f3\\fmodern\\fcharset0 Courier New;}}\n{\\colortbl\\red0\\green0\\blue0;\\red0\\green0\\blue255;}\n\\uc1\\pard\\plain\\deftab360
+      \\f0\\fs24 \n{\\*\\htmltag19 &lt;html&gt;}\n{\\*\\htmltag2 \\par }\n{\\*\\htmltag50
+      &lt;body&gt;}\n{\\*\\htmltag0 \\par }\n{\\*\\htmltag64 &lt;h1&gt;}\\htmlrtf {\\fs48
+      \\par\\b \\htmlrtf0 \\htmlrtf {\\htmlrtf0 \\htmlrtf {\\fs48 \\htmlrtf0 Title Here\\htmlrtf
+      }\\htmlrtf0 \\htmlrtf\\par}\\htmlrtf0\n\\htmlrtf \\par }\\htmlrtf0 \n{\\*\\htmltag72
+      &lt;/h1&gt;}\n{\\*\\htmltag0 \\par }\n{\\*\\htmltag64 &lt;p&gt;}\\htmlrtf \\par\n\\htmlrtf0
+      \\htmlrtf {\\htmlrtf0 Simple HTML test.\\htmlrtf\\par}\\htmlrtf0\n\\htmlrtf \\par\n\\htmlrtf0
+      \n{\\*\\htmltag72 &lt;/p&gt;}\n{\\*\\htmltag0 \\par }{\\*\\htmltag64}\\htmlrtf
+      {\\htmlrtf0 \n{\\fldrslt\\cf1\\ul }}\\htmlrtf0 {\\*\\htmltag72}\\htmlrtf\\par}\\htmlrtf0\n\n{\\*\\htmltag58
+      &lt;/body&gt;}\n{\\*\\htmltag2 \\par }\n{\\*\\htmltag27 &lt;/html&gt;}}\n</code></pre>\n\n<p>Epic
+      facepalm right there. That's uncompressed as well, so not only would I have to
+      implement a HTML to RTFHTML library, but then I'd have to fix the LZ compression
+      library I started to actually work as Outlook expects.</p>\n\n<p>Worth it? Nope.</p>\n\n<p>As
+      far as I can tell, there is no legitimate reason for OFT to be part of an EDM
+      delivery other than clients being cheap and not using a proper EDM management
+      solution (almost all of which support plain HTML templates).</p>\n\n<p>I've left
+      my code up on Github for any brave souls who really want to continue the work,
+      but it really is more trouble than it's worth and they \"why\" for delivering
+      OFT files should very much be revisited and clients educated.</p>\n\n<h2 id=\"sources\">Sources</h2>\n\n<p>In
+      no particular order:</p>\n\n<ul>\n<li><a href='http://support.microsoft.com/kb/268440'>http://support.microsoft.com/kb/268440</a></li>\n<li><a
+      href='http://msdn.microsoft.com/en-us/library/ee159831%28v=exchg.80%29.aspx'>http://msdn.microsoft.com/en-us/library/ee159831%28v=exchg.80%29.aspx</a></li>\n<li><a
+      href='http://msdn.microsoft.com/en-us/library/bb446140.aspx'>http://msdn.microsoft.com/en-us/library/bb446140.aspx</a></li>\n<li><a
+      href='http://msdn.microsoft.com/en-us/library/cc463890%28v=exchg.80%29.aspx'>http://msdn.microsoft.com/en-us/library/cc463890%28v=exchg.80%29.aspx</a></li>\n<li><a
+      href='http://blogs.msdn.com/b/openspecification/archive/2009/11/06/msg-file-format-part-1.aspx'>http://blogs.msdn.com/b/openspecification/archive/2009/11/06/msg-file-format-part-1.aspx</a></li>\n<li><a
+      href='http://www.dimastr.com/outspy/home.htm'>http://www.dimastr.com/outspy/home.htm</a></li>\n<li><a
+      href='https://mfcmapi.codeplex.com/'>https://mfcmapi.codeplex.com/</a></li>\n<li><a
+      href='https://github.com/retro486/html2oft'>https://github.com/retro486/html2oft</a></li>\n</ul>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1404167668381'
+    - '1'
+    - '1404168467488'
+    - '1'
+    - '1404168467489'
+    - '1'
+  - - '10'
+    - 1412ccff-efe1-4cf2-b712-91c0184b168a
+    - Waiting on multiple async calls in JavaScript
+    - waiting-on-multiple-async-calls-in-javascript
+    - "Recently I decided to play around with HTML5 Canvas game development a bit. Long
+      story short, I really enjoy the (admittedly easy) rogue-like games that've been
+      out on Android and Windows phone and wanted to put together my own that could
+      be played in a browser or packaged with something like PhoneGap but didn't like
+      any of the current HTML5 Canvas game libs out there. Plus, nothing teaches you
+      more about the wheel than trying to reinvent it.\n\nVery quickly I hit an issue
+      where I needed to block and wait for the spritesheet images to all load before
+      launching the main game loop or else I would get the \"not loaded\" error when
+      the image elements were accessed by Canvas.\n\nEnter Promises.\n\nThere are a
+      few libs for implementing Promises in JavaScript, but I chose to go with [Q](https://github.com/kriskowal/q).\n\nPromises
+      let you receive a promise that an async method will either success or fail, and
+      will let you know in either case. This lets you do things like chain promises
+      that rely on the previous promised response, effectively blocking until those
+      promised results are returned.\n\nTo make Image.onload promise it will return
+      when it's complete, I initialized them with this:\n\n```\nfunction Sprite(filename)
+      {\n  this.img = new Image();\n  this.img.src = filename;\n  \n  this.then = function()
+      {\n    var deferred = Q.defer();\n    this.img.onload = function() {\n      deferred.resolve();\n
+      \   }\n    return deferred.promise;\n  };\n}\n```\n\nThen, in my core game code:\n\n```\nvar
+      __sprite_promises = [];\n\nfunction Game() {\n  this.sprites = [];\n  \n  this.addSprite
+      = function(sprite) {\n    sprites.push(sprite);\n    __sprite_promises.push(sprite.then());\n
+      \ }\n  \n  this.start = function() {\n    Q.all(__sprite_promises).then(function()
+      {\n      actuallyStartGameLoop();\n    });\n  };\n}\n```\n\nIt's on my to-do list
+      to drop that global but it's working and does an OK job demonstrating how I implemented
+      promises with Q.\n\nWhen \"game.start()\" is called, it tells Q to gather all
+      the sprite promises, wait on all of them, then actually start the game loop. This
+      ensures all the async image loading is done before the game can actually continue.\n\n##
+      Resources\n\n* https://github.com/kriskowal/q\n* https://github.com/retro486/canvasgamelib"
+    - "<p>Recently I decided to play around with HTML5 Canvas game development a bit.
+      Long story short, I really enjoy the (admittedly easy) rogue-like games that've
+      been out on Android and Windows phone and wanted to put together my own that could
+      be played in a browser or packaged with something like PhoneGap but didn't like
+      any of the current HTML5 Canvas game libs out there. Plus, nothing teaches you
+      more about the wheel than trying to reinvent it.</p>\n\n<p>Very quickly I hit
+      an issue where I needed to block and wait for the spritesheet images to all load
+      before launching the main game loop or else I would get the \"not loaded\" error
+      when the image elements were accessed by Canvas.</p>\n\n<p>Enter Promises.</p>\n\n<p>There
+      are a few libs for implementing Promises in JavaScript, but I chose to go with
+      <a href=\"https://github.com/kriskowal/q\">Q</a>.</p>\n\n<p>Promises let you receive
+      a promise that an async method will either success or fail, and will let you know
+      in either case. This lets you do things like chain promises that rely on the previous
+      promised response, effectively blocking until those promised results are returned.</p>\n\n<p>To
+      make Image.onload promise it will return when it's complete, I initialized them
+      with this:</p>\n\n<pre><code>function Sprite(filename) {  \n  this.img = new Image();\n
+      \ this.img.src = filename;\n\n  this.then = function() {\n    var deferred = Q.defer();\n
+      \   this.img.onload = function() {\n      deferred.resolve();\n    }\n    return
+      deferred.promise;\n  };\n}\n</code></pre>\n\n<p>Then, in my core game code:</p>\n\n<pre><code>var
+      __sprite_promises = [];\n\nfunction Game() {  \n  this.sprites = [];\n\n  this.addSprite
+      = function(sprite) {\n    sprites.push(sprite);\n    __sprite_promises.push(sprite.then());\n
+      \ }\n\n  this.start = function() {\n    Q.all(__sprite_promises).then(function()
+      {\n      actuallyStartGameLoop();\n    });\n  };\n}\n</code></pre>\n\n<p>It's
+      on my to-do list to drop that global but it's working and does an OK job demonstrating
+      how I implemented promises with Q.</p>\n\n<p>When \"game.start()\" is called,
+      it tells Q to gather all the sprite promises, wait on all of them, then actually
+      start the game loop. This ensures all the async image loading is done before the
+      game can actually continue.</p>\n\n<h2 id=\"resources\">Resources</h2>\n\n<ul>\n<li><a
+      href='https://github.com/kriskowal/q'>https://github.com/kriskowal/q</a></li>\n<li><a
+      href='https://github.com/retro486/canvasgamelib'>https://github.com/retro486/canvasgamelib</a></li>\n</ul>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1404335701220'
+    - '1'
+    - '1404335704839'
+    - '1'
+    - '1404335704840'
+    - '1'
+  - - '11'
+    - ff851664-92ac-48b3-a15d-5813b492f78d
+    - Asset Repository in Go
+    - asset-repository-in-go
+    - |-
+      Welp finally finished the asset repository project I started a few weeks back that made use of OTP for simple authentication.
+
+      https://github.com/retro486/go-asset-repo
+
+      Very basic and my first complete Go project so of course beware of dragons. Be sure to read the README for setting the correct environment variables. Note that the upload location should be hosted by nginx or some other static server.
+    - |-
+      <p>Welp finally finished the asset repository project I started a few weeks back that made use of OTP for simple authentication.</p>
+
+      <p><a href='https://github.com/retro486/go-asset-repo'>https://github.com/retro486/go-asset-repo</a></p>
+
+      <p>Very basic and my first complete Go project so of course beware of dragons. Be sure to read the README for setting the correct environment variables. Note that the upload location should be hosted by nginx or some other static server.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1404685478071'
+    - '1'
+    - '1404685478071'
+    - '1'
+    - '1404685478072'
+    - '1'
+  - - '12'
+    - 1930f1c1-c0c3-4109-b1d2-7f1835e2f05b
+    - Host Your Own Streaming Music
+    - host-your-own-streaming-music
+    - |-
+      Tired of flipping between Amazon MP3 (I mean Amazon Prime Music) and Google Music (I mean Google Play) and how they both just mash my personal collection into their "free" cloud, I decided to look into hosting my own collection.
+
+      Luckily there's [Madsonic](http://www.madsonic.org/) which is based on the excellent [Subsonic](http://www.subsonic.org/). The differences being Subsonic charges a $1 a month subscription for the mobile apps whereas Madsonic charges a flat amount in the Amazon and Google Play stores. Subsonic also includes clients for Blackberry, Windows Phone, and iPhone, so if you use any of those three devices you may be better off with Subsonic.
+
+      As to Madsonic, there is a server component and an Android client. iSub seems to be a decent iOS app; [see the discussion thread](http://www.madsonic.org/forum/viewtopic.php?t=798&p=2059). You can also use your web browser which is a nice fallback when you're on a machine you can't install to but the interface feels a little heavy and cluttered.
+
+      Both [server](https://github.com/MadMarty/madsonic-server-5.0) and [client](https://github.com/MadMarty/madsonic-5.5) are open source which is excellent for those who like to tinker. I'm looking forward to giving it a shot on my Google-free captivatemtd (currently running Omni 4.4.2 like a champ).
+    - |-
+      <p>Tired of flipping between Amazon MP3 (I mean Amazon Prime Music) and Google Music (I mean Google Play) and how they both just mash my personal collection into their "free" cloud, I decided to look into hosting my own collection.</p>
+
+      <p>Luckily there's <a href="http://www.madsonic.org/">Madsonic</a> which is based on the excellent <a href="http://www.subsonic.org/">Subsonic</a>. The differences being Subsonic charges a $1 a month subscription for the mobile apps whereas Madsonic charges a flat amount in the Amazon and Google Play stores. Subsonic also includes clients for Blackberry, Windows Phone, and iPhone, so if you use any of those three devices you may be better off with Subsonic.</p>
+
+      <p>As to Madsonic, there is a server component and an Android client. iSub seems to be a decent iOS app; <a href="http://www.madsonic.org/forum/viewtopic.php?t=798&amp;p=2059">see the discussion thread</a>. You can also use your web browser which is a nice fallback when you're on a machine you can't install to but the interface feels a little heavy and cluttered.</p>
+
+      <p>Both <a href="https://github.com/MadMarty/madsonic-server-5.0">server</a> and <a href="https://github.com/MadMarty/madsonic-5.5">client</a> are open source which is excellent for those who like to tinker. I'm looking forward to giving it a shot on my Google-free captivatemtd (currently running Omni 4.4.2 like a champ).</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1405205244134'
+    - '1'
+    - '1405211642832'
+    - '1'
+    - '1405205244135'
+    - '1'
+  - - '13'
+    - c6e0a388-b073-4aec-bb90-c559b77a44ce
+    - Please Optimize Your Mobile Apps
+    - please-optimize-your-mobile-apps
+    - |-
+      As a gadget-obsessed nerd, I buy all kinds of things that show promise but most ultimately fail (Ouya and Windows Phone to name two) but their failure isn't due to their build quality, hardware specifications, or vendor support.
+
+      Quite the opposite. The build quality is usually surprisingly good, vendor support superb (in the form of SDK's, documentation, and support), and hardware specifications, while generally low, are enough if developers would bother to spend an hour or two adding configuration options.
+
+      It's possible that developers aren't fully to blame. There are, after all, many people usually involved in mobile app development. Especially if it's sponsored by a publisher (EA, Zynga, etc). No doubt managers have looked at these apps and demanded more sugar, more glitz, more fancy transitions. All this and to be expected to hit their original dead line.
+
+      So of course no time is spent putting in fall-backs or options where users can disable these various features that add zero functionality or easy options like controlling how many items to show per screen or disabling auto-loading of more items to cut back on delays due to network lag/processing time.
+
+      An excellent example of an app that does it right is Nova Launcher, for Android. While they go a little overboard in their settings, letting you control very low level and very dangerous settings, they do let you control transition animations, icons per screen, and other performance-related features. The latest and greatest Nova Launcher runs equally well on my quad-core as it does on my four-year-old single core.
+
+      If other app developers could mimic the ability to disable resource-intensive features, we wouldn't be locked in this ridiculous cycle of paying $400 every six months to get a device that can handle things like Tumblr and Facebook. I won't even mention mobile games. Those would be the easiest to fix, if just by offering the ability to disable lighting and particle effects (polygons and textures are generally fine).
+
+      Running perfect on a single core may be too much to expect, but please at the very least speed test your apps on a slightly older dual core (Kindle Fire HD, iPhone 4s, Nokia Lumia 520). Think of the market you would gain by reaching out to lower-end/older devices. You're not losing money since most app stores have a pay-once-per-account-unlimited-devices policy anyway.
+
+      Please consider adding such configurable options to your apps. It benefits everybody and your group would gain huge karma points and app ratings.
+    - |-
+      <p>As a gadget-obsessed nerd, I buy all kinds of things that show promise but most ultimately fail (Ouya and Windows Phone to name two) but their failure isn't due to their build quality, hardware specifications, or vendor support.</p>
+
+      <p>Quite the opposite. The build quality is usually surprisingly good, vendor support superb (in the form of SDK's, documentation, and support), and hardware specifications, while generally low, are enough if developers would bother to spend an hour or two adding configuration options.</p>
+
+      <p>It's possible that developers aren't fully to blame. There are, after all, many people usually involved in mobile app development. Especially if it's sponsored by a publisher (EA, Zynga, etc). No doubt managers have looked at these apps and demanded more sugar, more glitz, more fancy transitions. All this and to be expected to hit their original dead line.</p>
+
+      <p>So of course no time is spent putting in fall-backs or options where users can disable these various features that add zero functionality or easy options like controlling how many items to show per screen or disabling auto-loading of more items to cut back on delays due to network lag/processing time.</p>
+
+      <p>An excellent example of an app that does it right is Nova Launcher, for Android. While they go a little overboard in their settings, letting you control very low level and very dangerous settings, they do let you control transition animations, icons per screen, and other performance-related features. The latest and greatest Nova Launcher runs equally well on my quad-core as it does on my four-year-old single core.</p>
+
+      <p>If other app developers could mimic the ability to disable resource-intensive features, we wouldn't be locked in this ridiculous cycle of paying $400 every six months to get a device that can handle things like Tumblr and Facebook. I won't even mention mobile games. Those would be the easiest to fix, if just by offering the ability to disable lighting and particle effects (polygons and textures are generally fine).</p>
+
+      <p>Running perfect on a single core may be too much to expect, but please at the very least speed test your apps on a slightly older dual core (Kindle Fire HD, iPhone 4s, Nokia Lumia 520). Think of the market you would gain by reaching out to lower-end/older devices. You're not losing money since most app stores have a pay-once-per-account-unlimited-devices policy anyway.</p>
+
+      <p>Please consider adding such configurable options to your apps. It benefits everybody and your group would gain huge karma points and app ratings.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1406060135279'
+    - '1'
+    - '1406060135279'
+    - '1'
+    - '1406060135280'
+    - '1'
+  - - '14'
+    - 0fdac290-28e1-4ded-b09d-751318101471
+    - FactoryGirl and Namespaced Models
+    - factorygirl-and-namespaced-models
+    - "**Warning:** this is a quick-and-dirty entry from my notes. I have a ton of them
+      to catch up on, so apologies!\n\nThere are a few blog entries already out there
+      but it took me a few visits to compile everything I had to do to get them to work
+      in an engine, with rspec, with name-spaced models, with associations, WITH traits...
+      whew...\n\n1. Build your engine framework (note: there is a way to tell it not
+      to add all the test stuff so you don’t have to gut it later)\n1. Install rspec-rails
+      as per usual:\n\t* bundle exec rspec --init \n\t* bundle exec rails g rspec:install\n\t*
+      Modify lib/your\\_engine\\_name/engine.rb and add this below whatever is in there:\n\n\t\t\tconfig.generators
+      do |g|\n\t    \t    g.test_framework :rspec, :view_specs => false\n\t        end\n
+      \           \n  * Modify Rakefile and change \"test\" in the APP_RAKEFILE path
+      to \"spec\".\n\n1. spec structure:\n  * spec/dummy (moved from test/dummy when
+      you generated your engine)\n  * spec/factories/your\\_engine\\_name/*.rb\n  *
+      spec/models/your\\_engine\\_name/*\\_spec.rb\n\n1. Define engines like:\n\n\t\trequire
+      “rails_helper” # REQUIRED\n\t\tFactoryGirl.define do\n\t\tfactory :factory_name,
+      class: \tYourEngineName::YourClassName do\n\t\t\tsome_attribute 'asdf'\n\t\t\tanother_attribute
+      20\n\t\t\tassociation :associated_model_name, factory: [:associated_model_factory_name,
+      :trait_name]\n\t\t\tend\n\t\tend\n\n### Sources\n\n  * http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-factorygirl/\n
+      \ * https://github.com/thoughtbot/factory_girl/issues/199\n  * http://pivotallabs.com/migrating-from-a-single-rails-app-to-a-suite-of-rails-engines/"
+    - |-
+      <p><strong>Warning:</strong> this is a quick-and-dirty entry from my notes. I have a ton of them to catch up on, so apologies!</p>
+
+      <p>There are a few blog entries already out there but it took me a few visits to compile everything I had to do to get them to work in an engine, with rspec, with name-spaced models, with associations, WITH traits... whew...</p>
+
+      <ol>
+      <li>Build your engine framework (note: there is a way to tell it not to add all the test stuff so you don’t have to gut it later)  </li>
+      <li><p>Install rspec-rails as per usual:  </p>
+
+      <ul><li>bundle exec rspec --init </li>
+      <li>bundle exec rails g rspec:install</li>
+      <li><p>Modify lib/your_engine_name/engine.rb and add this below whatever is in there:</p>
+
+      <pre><code>config.generators do |g|
+          g.test_framework :rspec, :view_specs =&gt; false
+      end
+      </code></pre></li>
+      <li><p>Modify Rakefile and change "test" in the APP_RAKEFILE path to "spec".</p></li></ul></li>
+      <li><p>spec structure:  </p>
+
+      <ul><li>spec/dummy (moved from test/dummy when you generated your engine)</li>
+      <li>spec/factories/your_engine_name/*.rb</li>
+      <li>spec/models/your_engine_name/*_spec.rb</li></ul></li>
+      <li><p>Define engines like:</p>
+
+      <pre><code>require “rails_helper” # REQUIRED
+      FactoryGirl.define do
+      factory :factory_name, class:   YourEngineName::YourClassName do
+          some_attribute 'asdf'
+          another_attribute 20
+          association :associated_model_name, factory: [:associated_model_factory_name, :trait_name]
+          end
+      end
+      </code></pre></li>
+      </ol>
+
+      <h3 id="sources">Sources</h3>
+
+      <ul>
+      <li><a href='http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-factorygirl/'>http://blog.pardner.com/2012/10/how-to-specify-traits-for-model-associations-in-factorygirl/</a></li>
+      <li><a href='https://github.com/thoughtbot/factory_girl/issues/199'>https://github.com/thoughtbot/factory_girl/issues/199</a></li>
+      <li><a href='http://pivotallabs.com/migrating-from-a-single-rails-app-to-a-suite-of-rails-engines/'>http://pivotallabs.com/migrating-from-a-single-rails-app-to-a-suite-of-rails-engines/</a></li>
+      </ul>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1411105765002'
+    - '1'
+    - '1411105769177'
+    - '1'
+    - '1411105769181'
+    - '1'
+  - - '15'
+    - 823cb20e-49c7-4429-8f66-b8313691102f
+    - Advanced Editing SharePoint Wiki Pages
+    - advanced-editing-sharepoint-wiki-pages
+    - "**WARNING:** Another quickie from my notes.\n\nProblem: A ton of pages either
+      created manually or just created incorrectly and you lost your SharePoint toolbar
+      and can't edit the page from the website or do anything else for that matter.\n\nSolution:
+      Create a fresh master page with all your CSS/JS references, create a page based
+      on this new master, Advanced edit, copy source and save somewhere as a base template.\n\n**If
+      you're migrating this page from one server to another, do not forget to change
+      the asset references in your CSS and your URLs in your master file. SharePoint
+      likes to inject absolute URLs.**\n\nFor the top half, copy from the start of the
+      file:\n\t\n    <%@ Assembly ...\n    \nDown to inside\n\n\t<SharePoint:EmbeddedFormField
+      id=\"WikiField\" ...\n    \nand then find:\n\n\t<div class=\"ms-rte-layoutszone-inner\"
+      role=\"textbox\" ...\n\nPaste your actual content within the above div.\n\nBasically
+      your file should look something like this now:\n\n\t<%@ Assembly ...\n\t\t<SharePoint:EmbeddedFormField
+      id=\"WikiField\" ...\n        \t<div class=\"ms-rte-layoutszone-inner\" role=\"textbox\"
+      ...\n            \t(your content here)\n             </div>\n         ...\n     </asp:Content>\n\nYou
+      will have to use SharePoint Designer in advanced mode to edit these wiki files
+      directly.\n\n**Warning: When you do this, any manually entered relative links
+      will be wiped out so copy your source to a temp file first, then paste it back
+      in once you pasted the top and bottom half of the template, putting your content
+      between the two.**\n\nSave the page, click \"ok\" when SharePoint warns you to
+      reload the page then you should be able to edit the content from the SharePoint
+      website like a normal wiki page (make note of the note above at this point since
+      you will notice your links are now all empty)."
+    - |-
+      <p><strong>WARNING:</strong> Another quickie from my notes.</p>
+
+      <p>Problem: A ton of pages either created manually or just created incorrectly and you lost your SharePoint toolbar and can't edit the page from the website or do anything else for that matter.</p>
+
+      <p>Solution: Create a fresh master page with all your CSS/JS references, create a page based on this new master, Advanced edit, copy source and save somewhere as a base template.</p>
+
+      <p><strong>If you're migrating this page from one server to another, do not forget to change the asset references in your CSS and your URLs in your master file. SharePoint likes to inject absolute URLs.</strong></p>
+
+      <p>For the top half, copy from the start of the file:</p>
+
+      <pre><code>&lt;%@ Assembly ...
+      </code></pre>
+
+      <p>Down to inside</p>
+
+      <pre><code>&lt;SharePoint:EmbeddedFormField id="WikiField" ...
+      </code></pre>
+
+      <p>and then find:</p>
+
+      <pre><code>&lt;div class="ms-rte-layoutszone-inner" role="textbox" ...
+      </code></pre>
+
+      <p>Paste your actual content within the above div.</p>
+
+      <p>Basically your file should look something like this now:</p>
+
+      <pre><code>&lt;%@ Assembly ...
+          &lt;SharePoint:EmbeddedFormField id="WikiField" ...
+              &lt;div class="ms-rte-layoutszone-inner" role="textbox" ...
+                  (your content here)
+              &lt;/div&gt;
+          ...
+      &lt;/asp:Content&gt;
+      </code></pre>
+
+      <p>You will have to use SharePoint Designer in advanced mode to edit these wiki files directly.</p>
+
+      <p><strong>Warning: When you do this, any manually entered relative links will be wiped out so copy your source to a temp file first, then paste it back in once you pasted the top and bottom half of the template, putting your content between the two.</strong></p>
+
+      <p>Save the page, click "ok" when SharePoint warns you to reload the page then you should be able to edit the content from the SharePoint website like a normal wiki page (make note of the note above at this point since you will notice your links are now all empty).</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1411313110886'
+    - '1'
+    - '1411313117347'
+    - '1'
+    - '1411313117363'
+    - '1'
+  - - '16'
+    - 6fb59c8d-50b3-43d3-9372-7c87a58ddd63
+    - Use hstore for Handling Flexible Fields
+    - use-hstore-for-handling-flexible-fields
+    - "__Update:__ Ignore this. Read my [quickie PSA about the JSON data type](http://rdkl.us/quickie-dont-bother-with-postgresql-hstore-use-json/).\n\n##
+      Problem\n\n\nHave a model with common fields hard-coded but there needs to be
+      more versions of this model, each will have its own subset of fields. Keeping
+      the base code flexible is paramount since it will be a gem/reused in other projects
+      so polymorphic models are discouraged. Postgresql will be the DB in use.\n\n\n##
+      Solution\n\n\nUse store. These notes assume Rails 4 is being used. Rails 3 requires
+      a few other steps not covered here.\n\n\n*Pros*\n\n\n* Can defined extra fields
+      in seeds instead of hard-coding/overriding models\n* Can use DB-level filtering
+      to save on memory (fewer instantiated ActiveRecord objects)\n* Fast\n* Can reimplement
+      permitted parameters and form logic to allow for Rails form magic to do its thing\n\n\n*Cons*\n\n\n*
+      Only work on PostgreSQL\n* Can only contain strings (have to deserialize any other
+      types from string)\n* Unpredictable schema (can’t make hstore fields required
+      without a lot of code checks)\n* Documentation scattered\n\n\n## Steps\n\n\n1.
+      Add \"gem 'activerecord-postgres-hstore’” to your Gemfile\n1. Add \"enable hstore\"
+      migration:\n\t\t\n        class CreateHstore < ActiveRecord::Migration\n        \tdef
+      up\n            \tenable_extension \"hstore\"\n        \tend\n        \tdef down\n
+      \           \tdisable_extension \"hstore\"\n        \tend\n        end\n1. Add
+      actual hstore migration:\n\n\t\tclass AddHstoreField < ActiveRecord::Migration\n
+      \       \tdef up\n            \tadd_column :things, :hstore_name, :hstore\n            end\n
+      \           def down\n            \tremove_column :things, :hstore_name\n            end\n
+      \       end\n1. Add seeds to fill values (if applicable)\n\t\n\t    Thing.create
+      name: 'Thing', hstore_name: {a_field: nil}\n1. Change your _params method:\n\n\t\tdef
+      thing_params\n\t\t\tallowed_params = ALLOWED_PARAMS\n            thing = Thing.find_by(name:
+      'Thing')\n\t\t\tallowed_params.push({hstore_name: thing.hstore_name.keys}) # Adds
+      a_field to params\n            params.require(:nomination).permit(allowed_params)\n
+      \    \tend\n1. Add to any forms you want to make use of the custom fields:\n\n\t\t=
+      f.fields_for :hstore_name, OpenStruct.new(f.object.hstore_name) do |p|\n\t\t\t-
+      f.object.hstore_name.keys.each do |field|\n\t\t\t\t= p.input field, as: :string\n
+      \               \n## Sources\n* https://github.com/diogob/activerecord-postgres-hstore\n*
+      http://codeloveandboards.com/blog/2014/07/16/rails-and-prostgresql-hstore-simple-use-case/"
+    - |-
+      <p><strong>Update:</strong> Ignore this. Read my <a href="http://rdkl.us/quickie-dont-bother-with-postgresql-hstore-use-json/">quickie PSA about the JSON data type</a>.</p>
+
+      <h2 id="problem">Problem</h2>
+
+      <p>Have a model with common fields hard-coded but there needs to be more versions of this model, each will have its own subset of fields. Keeping the base code flexible is paramount since it will be a gem/reused in other projects so polymorphic models are discouraged. Postgresql will be the DB in use.</p>
+
+      <h2 id="solution">Solution</h2>
+
+      <p>Use store. These notes assume Rails 4 is being used. Rails 3 requires a few other steps not covered here.</p>
+
+      <p><em>Pros</em></p>
+
+      <ul>
+      <li>Can defined extra fields in seeds instead of hard-coding/overriding models</li>
+      <li>Can use DB-level filtering to save on memory (fewer instantiated ActiveRecord objects)</li>
+      <li>Fast</li>
+      <li>Can reimplement permitted parameters and form logic to allow for Rails form magic to do its thing</li>
+      </ul>
+
+      <p><em>Cons</em></p>
+
+      <ul>
+      <li>Only work on PostgreSQL</li>
+      <li>Can only contain strings (have to deserialize any other types from string)</li>
+      <li>Unpredictable schema (can’t make hstore fields required without a lot of code checks)</li>
+      <li>Documentation scattered</li>
+      </ul>
+
+      <h2 id="steps">Steps</h2>
+
+      <ol>
+      <li>Add "gem 'activerecord-postgres-hstore’” to your Gemfile  </li>
+      <li><p>Add "enable hstore" migration:</p>
+
+      <pre><code>class CreateHstore &lt; ActiveRecord::Migration
+          def up
+              enable_extension "hstore"
+          end
+          def down
+              disable_extension "hstore"
+          end
+      end
+      </code></pre></li>
+      <li><p>Add actual hstore migration:</p>
+
+      <pre><code>class AddHstoreField &lt; ActiveRecord::Migration
+          def up
+              add_column :things, :hstore_name, :hstore
+          end
+          def down
+              remove_column :things, :hstore_name
+          end
+      end
+      </code></pre></li>
+      <li><p>Add seeds to fill values (if applicable)</p>
+
+      <pre><code>Thing.create name: 'Thing', hstore_name: {a_field: nil}
+      </code></pre></li>
+      <li><p>Change your _params method:</p>
+
+      <pre><code>def thing_params
+          allowed_params = ALLOWED_PARAMS
+          thing = Thing.find_by(name: 'Thing')
+          allowed_params.push({hstore_name: thing.hstore_name.keys}) # Adds a_field to params
+          params.require(:nomination).permit(allowed_params)
+      end
+      </code></pre></li>
+      <li><p>Add to any forms you want to make use of the custom fields:</p>
+
+      <pre><code>= f.fields_for :hstore_name, OpenStruct.new(f.object.hstore_name) do |p|
+          - f.object.hstore_name.keys.each do |field|
+              = p.input field, as: :string
+      </code></pre></li>
+      </ol>
+
+      <h2 id="sources">Sources</h2>
+
+      <ul>
+      <li><a href='https://github.com/diogob/activerecord-postgres-hstore'>https://github.com/diogob/activerecord-postgres-hstore</a></li>
+      <li><a href='http://codeloveandboards.com/blog/2014/07/16/rails-and-prostgresql-hstore-simple-use-case/'>http://codeloveandboards.com/blog/2014/07/16/rails-and-prostgresql-hstore-simple-use-case/</a></li>
+      </ul>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1412873751664'
+    - '1'
+    - '1452753694856'
+    - '1'
+    - '1412873963013'
+    - '1'
+  - - '17'
+    - 6ae7b874-9202-444a-a489-8eef52e2e2ad
+    - Don't Rely on Chrome's Mobile Preview
+    - dont-rely-on-chromes-mobile-preview
+    - "Just a quickie.\n\nChrome's mobile preview. It's exactly that. A preview. It
+      tends to have an issue with replicating accurate font sizes and element sizing
+      and is quite different than say how iOS Safari looks.\n\nFor something more accurate
+      use the [Android emulator](http://developer.android.com/tools/devices/emulator.html),
+      [iOS Simulator](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator.html#//apple_ref/doc/uid/TP40012848-CH5-SW4),
+      or the [Windows Phone emulator](https://msdn.microsoft.com/en-us/library/windows/apps/ff402563\\(v=vs.105\\).aspx)
+      to test your site.\n\nIf you need to test static files, you can easily make use
+      of something like [Middleman](https://middlemanapp.com/) to host them locally.
+      Just follow the instructions on getting Middleman installed then put your sources
+      files in the source folder and access them at localhost:4567/filename.html "
+    - |-
+      <p>Just a quickie.</p>
+
+      <p>Chrome's mobile preview. It's exactly that. A preview. It tends to have an issue with replicating accurate font sizes and element sizing and is quite different than say how iOS Safari looks.</p>
+
+      <p>For something more accurate use the <a href="http://developer.android.com/tools/devices/emulator.html">Android emulator</a>, <a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/iOS_Simulator_Guide/GettingStartedwithiOSSimulator.html#//apple_ref/doc/uid/TP40012848-CH5-SW4">iOS Simulator</a>, or the <a href="https://msdn.microsoft.com/en-us/library/windows/apps/ff402563(v=vs.105).aspx">Windows Phone emulator</a> to test your site.</p>
+
+      <p>If you need to test static files, you can easily make use of something like <a href="https://middlemanapp.com/">Middleman</a> to host them locally. Just follow the instructions on getting Middleman installed then put your sources files in the source folder and access them at localhost:4567/filename.html </p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1428796510328'
+    - '1'
+    - '1428796510328'
+    - '1'
+    - '1428796510348'
+    - '1'
+  - - '18'
+    - f307c705-9f0a-4a2c-8ee6-e564d72560cb
+    - Clean up local Git branches
+    - clean-up-local-git-branches
+    - |-
+      Another quick one.
+
+      After a few weeks of working on a team project, my local git branch list was getting just completely useless. Hoping branch to branch and trying to remember where each branch is at is not something I enjoy.
+
+      Time to clean out all those master-merged branches!
+
+      ```
+      git checkout master
+      git branch --merged | awk '{ system("git branch -d " $0) }'
+      ```
+
+      You will see some errors as awk tries to use git to remove individual files thinking they're branches but they can be safely ignored. I'm sure there's a way to filter those out but this has been working very well for me. It will safely leave your in-progress/abandoned branches alone.
+    - "<p>Another quick one.</p>\n\n<p>After a few weeks of working on a team project,
+      my local git branch list was getting just completely useless. Hoping branch to
+      branch and trying to remember where each branch is at is not something I enjoy.</p>\n\n<p>Time
+      to clean out all those master-merged branches!</p>\n\n<pre><code>git checkout
+      master  \ngit branch --merged | awk '{ system(\"git branch -d \" $0) }'  \n</code></pre>\n\n<p>You
+      will see some errors as awk tries to use git to remove individual files thinking
+      they're branches but they can be safely ignored. I'm sure there's a way to filter
+      those out but this has been working very well for me. It will safely leave your
+      in-progress/abandoned branches alone.</p>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1428796705386'
+    - '1'
+    - '1428796705386'
+    - '1'
+    - '1428796705410'
+    - '1'
+  - - '19'
+    - 147c7c27-f0c6-41ae-b265-c339015ac4e1
+    - Nested Namespaces in Rails 4 Engines
+    - nested-namespaces-in-rails-4-engines
+    - "Today I hit an interesting bug where my engine would run just fine in development
+      and on staging, but once up on sandbox (which has a config closely resembling
+      production), I would get circular dependency errors whenever I tried to access
+      a specific area of the mounted engine.\n\nAs it turns out, I was making use of
+      nested namespaces and Rails didn't like my class declaration lines when it was
+      preloading my engine (as part of the production configuration).\n\nHere's what
+      I had:\n\n```ruby\nmodule MyEngine\n\tclass Admin::PagesController < ApplicationController\n
+      \   \t...\n    end\nend\n```\n\nRails didn't like this. Here's what got it working:
+      spell out the modules.\n\n```ruby\nmodule MyEngine\n\tmodule Admin\n    \tclass
+      PagesController < ApplicationController\n        \t...\n        end\n    end\nend\n```\n\nSadly,
+      this isn't as clean looking, with the added indent, but it worked.\n\t"
+    - "<p>Today I hit an interesting bug where my engine would run just fine in development
+      and on staging, but once up on sandbox (which has a config closely resembling
+      production), I would get circular dependency errors whenever I tried to access
+      a specific area of the mounted engine.</p>\n\n<p>As it turns out, I was making
+      use of nested namespaces and Rails didn't like my class declaration lines when
+      it was preloading my engine (as part of the production configuration).</p>\n\n<p>Here's
+      what I had:</p>\n\n<pre><code class=\"ruby\">module MyEngine  \n    class Admin::PagesController
+      &lt; ApplicationController\n        ...\n    end\nend  \n</code></pre>\n\n<p>Rails
+      didn't like this. Here's what got it working: spell out the modules.</p>\n\n<pre><code
+      class=\"ruby\">module MyEngine  \n    module Admin\n        class PagesController
+      &lt; ApplicationController\n            ...\n        end\n    end\nend  \n</code></pre>\n\n<p>Sadly,
+      this isn't as clean looking, with the added indent, but it worked.</p>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1430441598409'
+    - '1'
+    - '1430441598409'
+    - '1'
+    - '1430441598411'
+    - '1'
+  - - '20'
+    - 501dbda2-1dcf-4a9e-bfc6-8f6fb566c645
+    - Multi-Attribute Sort with Ruby
+    - multi-attribute-sort-with-ruby
+    - "Recently I needed to sort a collection of objects based on several attributes:
+      country, then state, then city, then street. I did it the ugly way first:\n\n```ruby\nall.sort
+      do |a1, b1|\n  c1 = a1.country.upcase <=> b1.country.upcase\n  if c1 == 0\n    c2
+      = a1.state.upcase <=> b1.state.upcase\n    if c2 == 0\n      c3 = a1.city.upcase
+      <=> b1.city.upcase\n      if c3 == 0\n        a1.street.upcase <=> b1.street.upcase\n
+      \     else\n        c3\n      end\n    else\n      c2\n    end\n  else\n    c1\n
+      \ end\nend\n```\n\nThen I realized Ruby can compare two 1D arrays natively:\n```ruby\nall.sort
+      do |a1, b1|\n  a = [a1.country.upcase, a1.state.upcase, a1.city.upcase, a1.street.upcase]\n
+      \ b = [b1.country.upcase, b1.state.upcase, b1.city.upcase, b1.street.upcase]\n
+      \   \n  a <=> b\nend\n```\n\nMuch cleaner! I can't talk to speed or memory usage
+      but my goal was readability over all else and I find this to be much easier to
+      understand."
+    - "<p>Recently I needed to sort a collection of objects based on several attributes:
+      country, then state, then city, then street. I did it the ugly way first:</p>\n\n<pre><code
+      class=\"ruby\">all.sort do |a1, b1|  \n  c1 = a1.country.upcase &lt;=&gt; b1.country.upcase\n
+      \ if c1 == 0\n    c2 = a1.state.upcase &lt;=&gt; b1.state.upcase\n    if c2 ==
+      0\n      c3 = a1.city.upcase &lt;=&gt; b1.city.upcase\n      if c3 == 0\n        a1.street.upcase
+      &lt;=&gt; b1.street.upcase\n      else\n        c3\n      end\n    else\n      c2\n
+      \   end\n  else\n    c1\n  end\nend  \n</code></pre>\n\n<p>Then I realized Ruby
+      can compare two 1D arrays natively:  </p>\n\n<pre><code class=\"ruby\">all.sort
+      do |a1, b1|  \n  a = [a1.country.upcase, a1.state.upcase, a1.city.upcase, a1.street.upcase]\n
+      \ b = [b1.country.upcase, b1.state.upcase, b1.city.upcase, b1.street.upcase]\n\n
+      \ a &lt;=&gt; b\nend  \n</code></pre>\n\n<p>Much cleaner! I can't talk to speed
+      or memory usage but my goal was readability over all else and I find this to be
+      much easier to understand.</p>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1431489837435'
+    - '1'
+    - '1431489837435'
+    - '1'
+    - '1431489837436'
+    - '1'
+  - - '21'
+    - 588459dc-df6c-42d3-9d16-47b31e1e81e2
+    - Database Views Simplify Legacy Models
+    - database-views-simplify-legacy-models
+    - "### The Problem\nRecently I've been maintaining a legacy application at work
+      which has a evolved into a fairly insane ball of duct tape. It's the kind of project
+      that's been passed along through several developers, each adding their own little
+      bit of spice.\n\nOne particular view required a table with the ability to filter
+      and sort each column.\n\nThis table was pulling data from about five different
+      tables. Some were relations, others were helpers. The relations would go three
+      or four levels deep; too deep for filterrific to handle correctly without shimming
+      in all the possible joins in a controller action.\n\nThat's fine and all but I
+      felt like something could be done to improve the performance as well as the code
+      smell.\n\nEnter database views.\n\nDatabases are powerful things and I often forget
+      how helpful they can be. In this case, I could make a database view with all the
+      fields I would need and match it to a model. This lets me clean up my controllers
+      and views.\n\n### The Migration\n\n```ruby\nclass AddSimpleView < ActiveRecord::Migration\n
+      \ def up\n    execute <<-SQL\n      CREATE VIEW simple_views AS\n        SELECT\n
+      \         a.id,\n          a.is_active,\n          b.created_at,\n          b.project_name,\n
+      \         c.id as owner_id,\n          c.created_at as owner_created_at,\n          d.id
+      as status_id\n        FROM table_a a\n        INNER JOIN table_b b ON b.a_id =
+      a.id\n        INNER JOIN table_c c ON c.b_id = b.id\n        INNER JOIN statuses
+      d ON d.a_id = a.id;\n    SQL\n  end\n  \n  def down\n    execute <<-SQL\n      DROP
+      VIEW simple_views;\n    SQL\n  end\nend\n```\n\n### The Model\n```ruby\nclass
+      SimpleView < ActiveRecord::Base\n  self.primary_key = 'id'\n  \n  belongs_to :table_b,
+      foreign_key: :a_id\n  belongs_to :statuses, foreign_key: :a_id\nend\n```\n\nThat's
+      it. Use the model like you would any other model but note it's read-only. This
+      allows for easier implementation of things like filterrific and tables in your
+      views.\n\n### Sources\n\n* http://blog.pivotal.io/labs/labs/database-views-performance-rails"
+    - "<h3 id=\"theproblem\">The Problem</h3>\n\n<p>Recently I've been maintaining a
+      legacy application at work which has a evolved into a fairly insane ball of duct
+      tape. It's the kind of project that's been passed along through several developers,
+      each adding their own little bit of spice.</p>\n\n<p>One particular view required
+      a table with the ability to filter and sort each column.</p>\n\n<p>This table
+      was pulling data from about five different tables. Some were relations, others
+      were helpers. The relations would go three or four levels deep; too deep for filterrific
+      to handle correctly without shimming in all the possible joins in a controller
+      action.</p>\n\n<p>That's fine and all but I felt like something could be done
+      to improve the performance as well as the code smell.</p>\n\n<p>Enter database
+      views.</p>\n\n<p>Databases are powerful things and I often forget how helpful
+      they can be. In this case, I could make a database view with all the fields I
+      would need and match it to a model. This lets me clean up my controllers and views.</p>\n\n<h3
+      id=\"themigration\">The Migration</h3>\n\n<pre><code class=\"ruby\">class AddSimpleView
+      &lt; ActiveRecord::Migration  \n  def up\n    execute &lt;&lt;-SQL\n      CREATE
+      VIEW simple_views AS\n        SELECT\n          a.id,\n          a.is_active,\n
+      \         b.created_at,\n          b.project_name,\n          c.id as owner_id,\n
+      \         c.created_at as owner_created_at,\n          d.id as status_id\n        FROM
+      table_a a\n        INNER JOIN table_b b ON b.a_id = a.id\n        INNER JOIN table_c
+      c ON c.b_id = b.id\n        INNER JOIN statuses d ON d.a_id = a.id;\n    SQL\n
+      \ end\n\n  def down\n    execute &lt;&lt;-SQL\n      DROP VIEW simple_views;\n
+      \   SQL\n  end\nend  \n</code></pre>\n\n<h3 id=\"themodel\">The Model</h3>\n\n<pre><code
+      class=\"ruby\">class SimpleView &lt; ActiveRecord::Base  \n  self.primary_key
+      = 'id'\n\n  belongs_to :table_b, foreign_key: :a_id\n  belongs_to :statuses, foreign_key:
+      :a_id\nend  \n</code></pre>\n\n<p>That's it. Use the model like you would any
+      other model but note it's read-only. This allows for easier implementation of
+      things like filterrific and tables in your views.</p>\n\n<h3 id=\"sources\">Sources</h3>\n\n<ul>\n<li><a
+      href='http://blog.pivotal.io/labs/labs/database-views-performance-rails'>http://blog.pivotal.io/labs/labs/database-views-performance-rails</a></li>\n</ul>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1432785100424'
+    - '1'
+    - '1432786887315'
+    - '1'
+    - '1432786887316'
+    - '1'
+  - - '22'
+    - aabfb78d-004d-48db-aa17-af458f7d2c22
+    - ActiveRelation Bug with Semi-complex Database Views
+    - activerelation-bug-with-semi-complex-database-views
+    - |-
+      There seems to be a bug where if you have a Database View-backed model making use of INNER JOIN and FULL OUTER JOIN (for edge case fields that may or may not exist... it's complicated... and horrible) and which makes use of relations and you have a scope with a joins/includes, you will not get the expected number of results when you add LIMIT and OFFSET (used by will\_paginate). Sometimes more, sometimes less. It varried machine to machine.
+
+      For example:
+
+      ```ruby
+      require 'will_paginate/array'
+
+      # Assuming the total number of "Bob" records is over 100:
+
+      ModelName.where(name: 'Bob').will_paginate(page: 1, per_page: 100).count > 100 # will be true
+
+      ModelName.where(name: 'Bob').to_a.will_paginate(page: 1, per_page: 100).count > 100 # will be false
+      ```
+
+      I haven't been able to replicate it in a smaller environment, using the latest of Rails, Filterrific, and will\_paginate, so it's very possible this has been resolved but due to the complexity and size of the (closed source) project this was happening in, there's no way for me to really tell without spending the time slowly gutting the project, which I don't own so I can't.
+
+      That said, my solution was to continue using the gems and ActiveRelation to build the query, then run the raw SQL:
+
+      ```ruby
+      sql = ModelName.where(name: 'Bob').will_paginate(page: 1, per_page: 100).to_sql
+      ModelName.find_by_sql(sql).count # Correctly returns 100
+      ```
+
+      I have no idea where the failure is but like I said, I simply didn't have the time to investigate further and since I can't replicate the problem in the latest release versions, it's likely been fixed. This is just some band-aid to help save some of your hair while working on legacy Rails projects.
+    - "<p>There seems to be a bug where if you have a Database View-backed model making
+      use of INNER JOIN and FULL OUTER JOIN (for edge case fields that may or may not
+      exist... it's complicated... and horrible) and which makes use of relations and
+      you have a scope with a joins/includes, you will not get the expected number of
+      results when you add LIMIT and OFFSET (used by will_paginate). Sometimes more,
+      sometimes less. It varried machine to machine.</p>\n\n<p>For example:</p>\n\n<pre><code
+      class=\"ruby\">require 'will_paginate/array'\n\n# Assuming the total number of
+      \"Bob\" records is over 100:\n\nModelName.where(name: 'Bob').will_paginate(page:
+      1, per_page: 100).count &gt; 100 # will be true\n\nModelName.where(name: 'Bob').to_a.will_paginate(page:
+      1, per_page: 100).count &gt; 100 # will be false  \n</code></pre>\n\n<p>I haven't
+      been able to replicate it in a smaller environment, using the latest of Rails,
+      Filterrific, and will_paginate, so it's very possible this has been resolved but
+      due to the complexity and size of the (closed source) project this was happening
+      in, there's no way for me to really tell without spending the time slowly gutting
+      the project, which I don't own so I can't.</p>\n\n<p>That said, my solution was
+      to continue using the gems and ActiveRelation to build the query, then run the
+      raw SQL:</p>\n\n<pre><code class=\"ruby\">sql = ModelName.where(name: 'Bob').will_paginate(page:
+      1, per_page: 100).to_sql  \nModelName.find_by_sql(sql).count # Correctly returns
+      100  \n</code></pre>\n\n<p>I have no idea where the failure is but like I said,
+      I simply didn't have the time to investigate further and since I can't replicate
+      the problem in the latest release versions, it's likely been fixed. This is just
+      some band-aid to help save some of your hair while working on legacy Rails projects.</p>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1436016605275'
+    - '1'
+    - '1436119476894'
+    - '1'
+    - '1436119476895'
+    - '1'
+  - - '23'
+    - dcf0b7f3-160b-4fb9-8a5b-060f42435acc
+    - I Want to Love Windows Phone, But...
+    - i-want-to-love-windows-phone-but
+    - |-
+      I want to love the products and services put out by Microsoft. They generally feel very well-polished and, in the case of some of their more recent consumer offerings like OneDrive and Windows Phone, cost a fraction of their competetors.
+
+      * Windows Phones without contracts regularly go for $400 and below for their **flagship** devices. Androids and iPhones are typically released above $600 retail.
+      * Microsoft Band (in my opinion the most functional wearable you can buy today) was **released** at $199.
+      * OneDrive comes with the same amount of storage as Google Drive, but you can buy 100GB for $1.99 a month. 1TB for $9.99 a month **and** it includes Office 365 Home (basically the storage is free with a subscription to Office 365 Home). If you use Bing, you can even earn rewards for 100GB of **free** space for a year. And they're actually obtainable rewards that would take you maybe a month (probably less if you tried) to build up.
+
+      But, their efforts just consistently seem to fall short.
+
+      * The Windows Phone ecosystem is _still_ **years** behind Android, which was behind iOS until very recently.
+      * Windows Phone device specs are relatively low but as Apple has proved, you don't need quad cores and massive amounts of RAM to get a smooth OS. The incredibly slow loading for most Windows apps could be blamed on developers but it ends up hurting Windows Phone.
+      * Lumia cameras are the best phone cameras in the world, but the paired hardware and software just can't handle their power and they end up being sluggish and the average person doesn't remember how slow and horrible digital photography used to be with standard digital cameras. They only see the latest iPhone taking fairly high quality shots in an instant. Yes, some of it is trickery (if user spams the camera button, don't bother autofocusing) but the lag to return to the "available" state is maddening. The 1020 was the most amazing **camera** I ever owned but the 5-7 second lag between shots was just unbearable.
+      * Google recently lowered it's Drive pricing to match Microsoft's, so the edge there is lost unless you absolutely need Office 365 Home, which as time goes on, will be less and less, as most business realize there's nothing special about Office and desktop Outlook is horrible and needs to die (\*_cough_\*4gigabytefilesizelimitcorruption\*_cough_\*).
+
+      Recently I had to mail in my brand new Lumia 830 to get services due to a weird bug in the wifi hardware. If it doesn't get resolved, I'm sad to say I'll likely either move back into Android (LG G3, here I come) or just bite the bullet and get an iPhone 6 Plus (I absolutely **LOVE** 240 fps slow-mo video and the Plus is the only one with optical image stabilization).
+
+      _Unless..._
+
+      Windows 10 changes everything. They have an opportunity to wipe the slate clean. Rework everything from the ground up, retaining .NET libraries of course so they don't lose what little app ecosystem they have. But they can optimize load times, make the I/O faster or more optimized on the task (camera gets 100% I/O priority, **ALWAYS**), improve network latency, fix all the things that are just _pushing_ me away from Windows Phone.
+
+      The ability to run Android apps, while considered by some to be a cop-out, I would appreciate as I recognize not everyone has the resources to maintain a third port of their app (fourth if you count the Amazon App store). This would help immensly but I've yet to see this feature in the Windows 10 preview, so I have no idea how it will work.
+
+      I doubt the iOS compatibility will result in anything since it requires effort on developers part and, speaking as a developer, forget that. Not for the piddly market share Windows Phone has. Hard, but truth.
+
+      Connecting a keyboard, mouse, and monitor to my phone to get a full desktop experience is awesome as long as I can run the desktop apps I'd expect to run (and in windows, not fullscreen): a command line, PuTTY, an editor. All else failing, at least I would have a full screen Cloud9 environment which is better than nothing, but again. This feature I've yet to see in the preview.
+
+      So many unknowns and even if the promises come true, I can see them very quickly failing. Here's hoping Windows 10 is the giant, amazing band-aid Windows Phone needs.
+    - |-
+      <p>I want to love the products and services put out by Microsoft. They generally feel very well-polished and, in the case of some of their more recent consumer offerings like OneDrive and Windows Phone, cost a fraction of their competetors.</p>
+
+      <ul>
+      <li>Windows Phones without contracts regularly go for $400 and below for their <strong>flagship</strong> devices. Androids and iPhones are typically released above $600 retail.</li>
+      <li>Microsoft Band (in my opinion the most functional wearable you can buy today) was <strong>released</strong> at $199.</li>
+      <li>OneDrive comes with the same amount of storage as Google Drive, but you can buy 100GB for $1.99 a month. 1TB for $9.99 a month <strong>and</strong> it includes Office 365 Home (basically the storage is free with a subscription to Office 365 Home). If you use Bing, you can even earn rewards for 100GB of <strong>free</strong> space for a year. And they're actually obtainable rewards that would take you maybe a month (probably less if you tried) to build up.</li>
+      </ul>
+
+      <p>But, their efforts just consistently seem to fall short.</p>
+
+      <ul>
+      <li>The Windows Phone ecosystem is <em>still</em> <strong>years</strong> behind Android, which was behind iOS until very recently.</li>
+      <li>Windows Phone device specs are relatively low but as Apple has proved, you don't need quad cores and massive amounts of RAM to get a smooth OS. The incredibly slow loading for most Windows apps could be blamed on developers but it ends up hurting Windows Phone.</li>
+      <li>Lumia cameras are the best phone cameras in the world, but the paired hardware and software just can't handle their power and they end up being sluggish and the average person doesn't remember how slow and horrible digital photography used to be with standard digital cameras. They only see the latest iPhone taking fairly high quality shots in an instant. Yes, some of it is trickery (if user spams the camera button, don't bother autofocusing) but the lag to return to the "available" state is maddening. The 1020 was the most amazing <strong>camera</strong> I ever owned but the 5-7 second lag between shots was just unbearable.</li>
+      <li>Google recently lowered it's Drive pricing to match Microsoft's, so the edge there is lost unless you absolutely need Office 365 Home, which as time goes on, will be less and less, as most business realize there's nothing special about Office and desktop Outlook is horrible and needs to die (*<em>cough</em>*4gigabytefilesizelimitcorruption*<em>cough</em>*).</li>
+      </ul>
+
+      <p>Recently I had to mail in my brand new Lumia 830 to get services due to a weird bug in the wifi hardware. If it doesn't get resolved, I'm sad to say I'll likely either move back into Android (LG G3, here I come) or just bite the bullet and get an iPhone 6 Plus (I absolutely <strong>LOVE</strong> 240 fps slow-mo video and the Plus is the only one with optical image stabilization).</p>
+
+      <p><em>Unless...</em></p>
+
+      <p>Windows 10 changes everything. They have an opportunity to wipe the slate clean. Rework everything from the ground up, retaining .NET libraries of course so they don't lose what little app ecosystem they have. But they can optimize load times, make the I/O faster or more optimized on the task (camera gets 100% I/O priority, <strong>ALWAYS</strong>), improve network latency, fix all the things that are just <em>pushing</em> me away from Windows Phone.</p>
+
+      <p>The ability to run Android apps, while considered by some to be a cop-out, I would appreciate as I recognize not everyone has the resources to maintain a third port of their app (fourth if you count the Amazon App store). This would help immensly but I've yet to see this feature in the Windows 10 preview, so I have no idea how it will work.</p>
+
+      <p>I doubt the iOS compatibility will result in anything since it requires effort on developers part and, speaking as a developer, forget that. Not for the piddly market share Windows Phone has. Hard, but truth.</p>
+
+      <p>Connecting a keyboard, mouse, and monitor to my phone to get a full desktop experience is awesome as long as I can run the desktop apps I'd expect to run (and in windows, not fullscreen): a command line, PuTTY, an editor. All else failing, at least I would have a full screen Cloud9 environment which is better than nothing, but again. This feature I've yet to see in the preview.</p>
+
+      <p>So many unknowns and even if the promises come true, I can see them very quickly failing. Here's hoping Windows 10 is the giant, amazing band-aid Windows Phone needs.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1436118643634'
+    - '1'
+    - '1436118643634'
+    - '1'
+    - '1436118643636'
+    - '1'
+  - - '24'
+    - 22e6852f-f3fe-48f8-b7b2-23403e61c41f
+    - My 30 Minutes with AngularJS and EmberJS in Rails 4
+    - 30-minutes-with-angularjs-and-emberjs-in-rails-4
+    - |-
+      I took a _very_ brief look at using EmberJS or AngularJS for our next move into front-end development as our JQuery applications are getting quite large and somewhat difficult to maintain. Even with excellent structure it's become too dangerous to add DOM functionality for fear that it will cause a chain reaction and break some other functionality down the road. Tests help but ultimately you can't test what people _will_ do, only what they're _supposed_ to do and it turns out they call it a "bug" when they do something unexpected.
+
+      I'll also point out that since I took so little time with both, I used their respective websites as my primary source of information and only a few times dipped into web searches to fill in gaps or look for examples of usage.
+
+      This also means this is not a tutorial on how to build a full working app using either EmberJS or AmberJS on Rails.
+
+      **Caveat**: since I only spent 30 minutes on each, I may make statements or ask questions that would have been answered if I had spent another five minutes or had done x, y, or z. So obviously this is not an opinion on each framework as a whole.
+
+      ## EmberJS
+
+      I first looked at EmberJS since I've heard good (well, _better_) things about it versus AngularJS and the ever damning asset pipeline in Rails (personally I'm for keeping libraries out of the asset pipeline and in the vendor/assets structure).
+
+      I started with the [ember-rails](https://github.com/emberjs/ember-rails) gem and followed the instructions there to get EmberJS loaded in my Rails environment.
+
+      That was simple enough, but I got no such "hello world" message following [Vic Ramon's Ember Tutorial](http://ember.vicramon.com/hello-world) (one of the first few search results on Google).
+
+      I essentially burned out my entire 30 minutes troubleshooting ember to load and I never got the controller to print out a message. I couldn't even get the Ember Chrome extension to detect my development site.
+
+      I also ended up with a project full of not just Rails scaffolding but now EmberJS scaffolding. I understand this is part of the "convention over configuration" design but I find it cluttered and confusing, especially as a new student in the toolkit.
+
+      This leads me to another realization: EmberJS is a whole language.
+
+      It's not just a framework. Yes, it relies on underlying languages to exist but when you integrate it with Rails, you're essentially rewriting a lot of code to exist in two places: Rails and EmberJS.
+
+      This can lead to wonderful things like relation awareness in the front-end and an all-in-one toolset for building a SPA (single page app) without having to reach out and get a bunch of other libraries that may or may not work anymore.
+
+      That said I also found a huge discrepency in documentation, both in the community and on the official site. The official site seems to assume I already know all about EmberJS and just need conceptual refreshers. None of the examples have context so I have no idea what setup is needed to make them work and it took until the end of my 30 minute foray to realize the above point on being a whole language and not just a framework.
+
+      Community documentation was disappointing. Most examples are over a year old and EmberJS has changed fundamental module names and structure since then so unless I lock myself to an old copy of EmberJS (which, when learning something new, why on earth would I do that?!) I'm stuck fumbling around trying to decipher what's appropriate or correct.
+
+      In the end I had a broken app with a lot of empty files and no "hello world".
+
+      ## AngularJS
+
+      With AngularJS, since I'd heard it doesn't play nice with the asset pipeline, I just went straight into loading it from vendor/assets. It was a single minified file at a whopping ~145kb, but since it's not being compiled into my app's unified files it can be cached. Using a CDN was difficult as it didn't load fast enough before the other JS was finished loading. I'm sure some RequireJS work here would solve that but that's for another day. I only had 30 minutes.
+
+      Right off the bat I saw AngularJS documentation on the site was organized by version number so it was crystal clear what I was reading, had a full app tutorial to walk you through the concepts and requirements, and the examples in the developer guide all came with just enough context for you to know exactly where they go.
+
+      Not only did I get my "hello world" app up, but I was able to build maybe 20% of an application I need to do for work. No persistance but I was able to learn all the concepts, such as nested controllers, data binding, and show/hide events to make fancy things happen like live-editing content.
+
+      I actually used the official AngularJS site as my primary source of information for my 30 minutes of training. Only once I had to search Stack Overflow for information on where DOM manipulation _should_ occur (answer: use directives).
+
+      At the end I was amazed how easily I was able to pick up AngularJS and then I realized AngularJS is exactly what it says it is. A suppliment to HTML, to make HTML more aware of data. It doesn't care about models, routes, or anything not related to the view. You can use it to build a SPA or not. It generally stays out of the way if you want to build partials with Rails then use AJAX in AngularJS to pull them in and insert them where appropriate with HTML data binding.
+
+      This means AngularJS isn't an all-in-one package. A lot of things you will still have to write yourself or use libraries, like how data is stored (if it's stored), how it's processed, relationships have to be managed manually, etc. All that considered, it's still a step forward from pure JQuery.
+
+      ## Conclusion
+
+      For me, since all my projects are Rails apps, AngularJS is a much better fit than EmberJS. EmberJS would probably be a stronger fit for use in a system that isn't so opinionated, like NodeJS or Sinatra. Something that really only responds as a content server and data store.
+
+      AngularJS is more of what I feel we are missing to add that extra sugar to make our Rails webapps feel modern without having to rewrite and maintain a lot of duplicate code.
+    - |-
+      <p>I took a <em>very</em> brief look at using EmberJS or AngularJS for our next move into front-end development as our JQuery applications are getting quite large and somewhat difficult to maintain. Even with excellent structure it's become too dangerous to add DOM functionality for fear that it will cause a chain reaction and break some other functionality down the road. Tests help but ultimately you can't test what people <em>will</em> do, only what they're <em>supposed</em> to do and it turns out they call it a "bug" when they do something unexpected.</p>
+
+      <p>I'll also point out that since I took so little time with both, I used their respective websites as my primary source of information and only a few times dipped into web searches to fill in gaps or look for examples of usage.</p>
+
+      <p>This also means this is not a tutorial on how to build a full working app using either EmberJS or AmberJS on Rails.</p>
+
+      <p><strong>Caveat</strong>: since I only spent 30 minutes on each, I may make statements or ask questions that would have been answered if I had spent another five minutes or had done x, y, or z. So obviously this is not an opinion on each framework as a whole.</p>
+
+      <h2 id="emberjs">EmberJS</h2>
+
+      <p>I first looked at EmberJS since I've heard good (well, <em>better</em>) things about it versus AngularJS and the ever damning asset pipeline in Rails (personally I'm for keeping libraries out of the asset pipeline and in the vendor/assets structure).</p>
+
+      <p>I started with the <a href="https://github.com/emberjs/ember-rails">ember-rails</a> gem and followed the instructions there to get EmberJS loaded in my Rails environment.</p>
+
+      <p>That was simple enough, but I got no such "hello world" message following <a href="http://ember.vicramon.com/hello-world">Vic Ramon's Ember Tutorial</a> (one of the first few search results on Google).</p>
+
+      <p>I essentially burned out my entire 30 minutes troubleshooting ember to load and I never got the controller to print out a message. I couldn't even get the Ember Chrome extension to detect my development site.</p>
+
+      <p>I also ended up with a project full of not just Rails scaffolding but now EmberJS scaffolding. I understand this is part of the "convention over configuration" design but I find it cluttered and confusing, especially as a new student in the toolkit.</p>
+
+      <p>This leads me to another realization: EmberJS is a whole language.</p>
+
+      <p>It's not just a framework. Yes, it relies on underlying languages to exist but when you integrate it with Rails, you're essentially rewriting a lot of code to exist in two places: Rails and EmberJS.</p>
+
+      <p>This can lead to wonderful things like relation awareness in the front-end and an all-in-one toolset for building a SPA (single page app) without having to reach out and get a bunch of other libraries that may or may not work anymore.</p>
+
+      <p>That said I also found a huge discrepency in documentation, both in the community and on the official site. The official site seems to assume I already know all about EmberJS and just need conceptual refreshers. None of the examples have context so I have no idea what setup is needed to make them work and it took until the end of my 30 minute foray to realize the above point on being a whole language and not just a framework.</p>
+
+      <p>Community documentation was disappointing. Most examples are over a year old and EmberJS has changed fundamental module names and structure since then so unless I lock myself to an old copy of EmberJS (which, when learning something new, why on earth would I do that?!) I'm stuck fumbling around trying to decipher what's appropriate or correct.</p>
+
+      <p>In the end I had a broken app with a lot of empty files and no "hello world".</p>
+
+      <h2 id="angularjs">AngularJS</h2>
+
+      <p>With AngularJS, since I'd heard it doesn't play nice with the asset pipeline, I just went straight into loading it from vendor/assets. It was a single minified file at a whopping ~145kb, but since it's not being compiled into my app's unified files it can be cached. Using a CDN was difficult as it didn't load fast enough before the other JS was finished loading. I'm sure some RequireJS work here would solve that but that's for another day. I only had 30 minutes.</p>
+
+      <p>Right off the bat I saw AngularJS documentation on the site was organized by version number so it was crystal clear what I was reading, had a full app tutorial to walk you through the concepts and requirements, and the examples in the developer guide all came with just enough context for you to know exactly where they go.</p>
+
+      <p>Not only did I get my "hello world" app up, but I was able to build maybe 20% of an application I need to do for work. No persistance but I was able to learn all the concepts, such as nested controllers, data binding, and show/hide events to make fancy things happen like live-editing content.</p>
+
+      <p>I actually used the official AngularJS site as my primary source of information for my 30 minutes of training. Only once I had to search Stack Overflow for information on where DOM manipulation <em>should</em> occur (answer: use directives).</p>
+
+      <p>At the end I was amazed how easily I was able to pick up AngularJS and then I realized AngularJS is exactly what it says it is. A suppliment to HTML, to make HTML more aware of data. It doesn't care about models, routes, or anything not related to the view. You can use it to build a SPA or not. It generally stays out of the way if you want to build partials with Rails then use AJAX in AngularJS to pull them in and insert them where appropriate with HTML data binding.</p>
+
+      <p>This means AngularJS isn't an all-in-one package. A lot of things you will still have to write yourself or use libraries, like how data is stored (if it's stored), how it's processed, relationships have to be managed manually, etc. All that considered, it's still a step forward from pure JQuery.</p>
+
+      <h2 id="conclusion">Conclusion</h2>
+
+      <p>For me, since all my projects are Rails apps, AngularJS is a much better fit than EmberJS. EmberJS would probably be a stronger fit for use in a system that isn't so opinionated, like NodeJS or Sinatra. Something that really only responds as a content server and data store.</p>
+
+      <p>AngularJS is more of what I feel we are missing to add that extra sugar to make our Rails webapps feel modern without having to rewrite and maintain a lot of duplicate code.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1436292658942'
+    - '1'
+    - '1436363918896'
+    - '1'
+    - '1436362844996'
+    - '1'
+  - - '25'
+    - 740773ee-08a5-461c-acae-906848e8a433
+    - I'm addicted to smartphones and here's what I've learned
+    - im-addicted-to-smartphones-and-heres-what-ive-learned
+    - "I've been bitten by the gadget bug pretty hard so I've been throwing just gobs
+      of money at eBay for smartwatches and smartphones and I've noticed a few things
+      watching all these YouTube videos, Amazon reviews, blogs, and [spec](http://www.gsmarena.com)
+      [comparison](http://www.antutu.com/en/Ranking.shtml) [websites](http://www.phonearena.com/).\n\nFor
+      the sake of this writeup I'm going to just talk about the smartphones (I settled
+      pretty comfortably on a $100 Moto 360 1st gen mostly for the wireless charging
+      and water resistance).\n\nFirst off, I _hypothesize_ that **there is no reason
+      to pay $600 and up for an Android phone, but there _are_ reasons to spend that
+      much on an iPhone.**\n\nAlso, let me add that reasons for decisions made by a
+      single individual are _highly_ subjective. Everyone only knows what they know
+      until they do research and learn more, or (it seems in most cases), take opinions
+      from others that sound good and just run with them. It all depends on the amount
+      of effort you care to spend, so I don't feel judgement is fair on people who have
+      the cash and don't want to deal with researching sub $300 devices when they can
+      buy a $600+ device and know they're getting a generally good smartphone.\n\n###
+      Why I'm Annoyed\n\nPersonally, in the past three years I've spent close to $2,500
+      trying out various smartphones. Including an iPhone 4S. I've bought and resold
+      almost all of them used on eBay. Now think about how many devices that is. At
+      eBay prices, which are typically $100-$400 cheaper than retail. I've owned all
+      these phones in the past three years:\n\n* Samsung Galaxy Captivate\n* Samsung
+      Galaxy SII Skyrocket\n* iPhone 4S\n* Samsung Note II\n* Lumia 520\n* Samsung Galaxy
+      S5 Mini\n* Motorola Moto G 1st gen (Google Play Edition)\n* Lumia 1020\n* Lumia
+      830\n* Samsung Note 3\n* Samsung Galaxy S5 Active\n* OnePlus One\n\nThat's a lot
+      of phones to go through when they're supposed to each last you about a year, maybe
+      two if you're frugal (or lucky enough to get updates for that long).\n\nEarly
+      on, it was all about specs and speed. Android hadn't yet reached its full speed
+      potential and faster CPUs were coming out every few months that increased performance
+      by a non-trivial amount.\n\nThen, once I hit the Note II, it became about **features**.
+      It was assumed that the CPU, RAM, and storage would all be at their acceptible
+      minimums for a smooth UI experience (typically quad core, 1.2GHz, 1GB RAM, 16GB
+      storage). Now it was about _what else will you give me_?\n\nFeatures that I never
+      thought about before, like screen technology (AMOLED vs IPS), Bluetooth version,
+      NFC, Android skin (Touchwiz), and **the camera**. Oh boy. That camera. The single
+      biggest reason for my device turnover rate.\n\nI'm not a professional photographer,
+      but the mood does strike me when I suddenly realize I'm staring at something amazing
+      and I want to take a _quick_ and _high quality_ picture of it. Keywords there
+      are **quick** and **high quality**. I usually got one, or the other. But not **both**.\n\nThe
+      5MP shooter on the Lumia 520, for example, while lacking a flash isn't something
+      I care about (I hate using flashes), it STILL can take amazing photos. Low light
+      performance is also amazing for a device that now costs [$50](http://www.amazon.com/Nokia-Lumia-520-GoPhone-AT/dp/B00E45043A/ref=sr_1_1?ie=UTF8&qid=1443899482&sr=8-1&keywords=lumia+520).\n\nBut.\n\nIt's
+      only 5MP, doesn't have OIS (optical image stabilization), and doesn't support
+      1080p video recording.\n\nNext.\n\nEach phone has it's reasons for why I dropped
+      it in favor of the next, but my reasons were pretty different for each one.\n\n*
+      iPhone 4S: I didn't like using iTunes on Windows and I refuse to buy into the
+      Apple ecosystem.\n* Galaxy SII Skyrocket: The older android segmented the storage
+      weird and I couldn't put apps on my SD card\n* Galaxy S5 Mini: I got tired of
+      Touchwiz and wanted a hackable phone.\n* Moto G GPE: The screen was _kind of_
+      pink.\n* Lumia 520, 1020, 830: Not enough apps and web performance is terrible
+      (c'mon already, Windows Phone 10!!)\n* OnePlus One: camera is terrible, no SD
+      slot, battery not removable, no quick charging.\n\nThose are the common reasons.
+      The other phones fall into some variant of those.\n\nOh, and those Android phones?
+      Basically abandoned by their manufacturers six months to a year after release.
+      The Windows Phones continue to receive security patches from Microsoft and some
+      will even get Windows 10.\n\n### Seeing the Pattern\n\nSo. Now I'm using a Galaxy
+      S5 Active that I bought on eBay for $209 used with some dings but in overall great
+      shape. It's got the magic combination of features that I love but updates are
+      rare and the camera is meh. _I_ only paid $209 for it. This is a $209 phone to
+      me. To whoever bought it at retail price it's a $580 phone. Would I have paid
+      $580 for it? Maybe in the past. I did almost buy the Galaxy S6 Active which is
+      a $600 phone. Supposedly that's one of the best phones you can buy right now.\n\n**$600**.
+      For a phone that (following [Zipf's Law](https://www.youtube.com/watch?v=fCn8zs912OE))
+      will meet maybe 80% of my wants (_not needs_), but against Zipf's Law, will cost
+      me well more than 20% the average price for a smartphone in the US (if you base
+      that on phones released in the US this year) which I'll say is about $800 right
+      now. Might be a little lower, but whatever. $800. 20% of $800 is $160. **Only
+      $160.** That's a little low so let's assume some margin of error and bump that
+      to an even $200. There. Margin of error for everyone at multiple levels. I apologize
+      if I've wildly misunderstood Zipf's Law but to be honest the numbers make sense
+      to me.\n\n**$200** should get me the **80%** of features that I've consistently
+      liked on all my devices, while compromising on the last 20%. And that last 20%
+      may not exist at all. I've yet to find a phone that for even $800 meets 100% of
+      my wants, and I believe it's unreasonable to expect that phone will ever exist
+      since _my_ 100% is subjective and seems to change frequently, based on what's
+      available. It's a moving target that will never get hit.\n\nI can stop right there
+      because I already have a $209 phone that meets 80% of my wants. But, it actually
+      isn't a $209 phone, it's a $580 phone. So that's an unfair statement.\n\n### The
+      True \"80%\" Android Phones\n\nI've recently purchased another phone. Yup. ANOTHER
+      ONE. Why, when I already have a $580 phone that I got for $209? Because this phone
+      is sold brand new at $129. There are a ton of these cheaper smartphones on the
+      market. One of the larger brands is BLU. BLU recently released a [$350 phone](https://www.youtube.com/watch?v=DB8Gttoqsl8)
+      that is very similar to a Galaxy Note 5, without the stylus. \n\nBLU is competing
+      with an $800 device by putting out a $350 device that has more than 80% of the
+      features. While personally I think the cap for budget phones should be $300, $350
+      is pretty close and I think we'll be seeing more \"80%\" phones in the coming
+      months closer to that $200 line. Some brands have hit that mark already, like
+      Asus and their [Zenfone 2](https://www.youtube.com/watch?v=8Yz4miS6N9Q) (which
+      I might end up settling on because let's be honest, $129 is a little _too_ good
+      to be true, but we'll see).\n\nThis is why I don't believe there is any reason
+      to spend $600+ for a device that you'll inevitably be only 80% satisfied with.
+      Especially if you can get that same 80% by spending a fraction of the price. Yes
+      I know most of that cost is marketing costs but I don't agree to that being a
+      reason we have to foot the bill. I believe in giving the quiet manufacturers a
+      chance.\n\n### Why the iPhone is actually a good deal\n\nThe Apple iPhone doesn't
+      appear to follow Zipf's Law. At first...\n\nThe current Apple iPhone 6S is $650
+      direct from Apple. It's not without it's share of issues but the device performance,
+      lack of segmentation, available support via physical stores, and level of integration
+      with the Apple ecosystem makes this a totally different experience. You buy Apple
+      to stay in Apple and their devices easily last two years due to excellent support
+      of older devices to keep them current, above and beyond critical security patches.\n\nIf
+      you average that out, you're spending $325 a year for your iPhone. **It's going
+      to last you those two years.** Will a $300 Android last you two years? Absolutely
+      not. Will a $600 Android? Maybe, but probably not. Most manufacturers stop patching
+      within a year, some as quickly as six months, with Google's Nexus devices being
+      an exception. My Galaxy S5 Active is only a year old and it's already been abandoned
+      by Samsung.\n\nThe excellent integration of the Apple ecosystem along with the
+      solid lifecycle support and balanced price means the iPhone is already very close
+      to Zipf's Law.\n\n### Conclusion\n\nI don't expect this to be all that helpful
+      to anyone but I've found the application of Zipf's Law very interesting (albeit
+      possibly inaccurate with all my admittedly ballpark figures) and being very useful
+      in setting my expectations and understanding the choice between a $200-$300 Android
+      and a $650 iPhone."
+    - |-
+      <p>I've been bitten by the gadget bug pretty hard so I've been throwing just gobs of money at eBay for smartwatches and smartphones and I've noticed a few things watching all these YouTube videos, Amazon reviews, blogs, and <a href="http://www.gsmarena.com">spec</a> <a href="http://www.antutu.com/en/Ranking.shtml">comparison</a> <a href="http://www.phonearena.com/">websites</a>.</p>
+
+      <p>For the sake of this writeup I'm going to just talk about the smartphones (I settled pretty comfortably on a $100 Moto 360 1st gen mostly for the wireless charging and water resistance).</p>
+
+      <p>First off, I <em>hypothesize</em> that <strong>there is no reason to pay $600 and up for an Android phone, but there <em>are</em> reasons to spend that much on an iPhone.</strong></p>
+
+      <p>Also, let me add that reasons for decisions made by a single individual are <em>highly</em> subjective. Everyone only knows what they know until they do research and learn more, or (it seems in most cases), take opinions from others that sound good and just run with them. It all depends on the amount of effort you care to spend, so I don't feel judgement is fair on people who have the cash and don't want to deal with researching sub $300 devices when they can buy a $600+ device and know they're getting a generally good smartphone.</p>
+
+      <h3 id="whyimannoyed">Why I'm Annoyed</h3>
+
+      <p>Personally, in the past three years I've spent close to $2,500 trying out various smartphones. Including an iPhone 4S. I've bought and resold almost all of them used on eBay. Now think about how many devices that is. At eBay prices, which are typically $100-$400 cheaper than retail. I've owned all these phones in the past three years:</p>
+
+      <ul>
+      <li>Samsung Galaxy Captivate</li>
+      <li>Samsung Galaxy SII Skyrocket</li>
+      <li>iPhone 4S</li>
+      <li>Samsung Note II</li>
+      <li>Lumia 520</li>
+      <li>Samsung Galaxy S5 Mini</li>
+      <li>Motorola Moto G 1st gen (Google Play Edition)</li>
+      <li>Lumia 1020</li>
+      <li>Lumia 830</li>
+      <li>Samsung Note 3</li>
+      <li>Samsung Galaxy S5 Active</li>
+      <li>OnePlus One</li>
+      </ul>
+
+      <p>That's a lot of phones to go through when they're supposed to each last you about a year, maybe two if you're frugal (or lucky enough to get updates for that long).</p>
+
+      <p>Early on, it was all about specs and speed. Android hadn't yet reached its full speed potential and faster CPUs were coming out every few months that increased performance by a non-trivial amount.</p>
+
+      <p>Then, once I hit the Note II, it became about <strong>features</strong>. It was assumed that the CPU, RAM, and storage would all be at their acceptible minimums for a smooth UI experience (typically quad core, 1.2GHz, 1GB RAM, 16GB storage). Now it was about <em>what else will you give me</em>?</p>
+
+      <p>Features that I never thought about before, like screen technology (AMOLED vs IPS), Bluetooth version, NFC, Android skin (Touchwiz), and <strong>the camera</strong>. Oh boy. That camera. The single biggest reason for my device turnover rate.</p>
+
+      <p>I'm not a professional photographer, but the mood does strike me when I suddenly realize I'm staring at something amazing and I want to take a <em>quick</em> and <em>high quality</em> picture of it. Keywords there are <strong>quick</strong> and <strong>high quality</strong>. I usually got one, or the other. But not <strong>both</strong>.</p>
+
+      <p>The 5MP shooter on the Lumia 520, for example, while lacking a flash isn't something I care about (I hate using flashes), it STILL can take amazing photos. Low light performance is also amazing for a device that now costs <a href="http://www.amazon.com/Nokia-Lumia-520-GoPhone-AT/dp/B00E45043A/ref=sr_1_1?ie=UTF8&amp;qid=1443899482&amp;sr=8-1&amp;keywords=lumia+520">$50</a>.</p>
+
+      <p>But.</p>
+
+      <p>It's only 5MP, doesn't have OIS (optical image stabilization), and doesn't support 1080p video recording.</p>
+
+      <p>Next.</p>
+
+      <p>Each phone has it's reasons for why I dropped it in favor of the next, but my reasons were pretty different for each one.</p>
+
+      <ul>
+      <li>iPhone 4S: I didn't like using iTunes on Windows and I refuse to buy into the Apple ecosystem.</li>
+      <li>Galaxy SII Skyrocket: The older android segmented the storage weird and I couldn't put apps on my SD card</li>
+      <li>Galaxy S5 Mini: I got tired of Touchwiz and wanted a hackable phone.</li>
+      <li>Moto G GPE: The screen was <em>kind of</em> pink.</li>
+      <li>Lumia 520, 1020, 830: Not enough apps and web performance is terrible (c'mon already, Windows Phone 10!!)</li>
+      <li>OnePlus One: camera is terrible, no SD slot, battery not removable, no quick charging.</li>
+      </ul>
+
+      <p>Those are the common reasons. The other phones fall into some variant of those.</p>
+
+      <p>Oh, and those Android phones? Basically abandoned by their manufacturers six months to a year after release. The Windows Phones continue to receive security patches from Microsoft and some will even get Windows 10.</p>
+
+      <h3 id="seeingthepattern">Seeing the Pattern</h3>
+
+      <p>So. Now I'm using a Galaxy S5 Active that I bought on eBay for $209 used with some dings but in overall great shape. It's got the magic combination of features that I love but updates are rare and the camera is meh. <em>I</em> only paid $209 for it. This is a $209 phone to me. To whoever bought it at retail price it's a $580 phone. Would I have paid $580 for it? Maybe in the past. I did almost buy the Galaxy S6 Active which is a $600 phone. Supposedly that's one of the best phones you can buy right now.</p>
+
+      <p><strong>$600</strong>. For a phone that (following <a href="https://www.youtube.com/watch?v=fCn8zs912OE">Zipf's Law</a>) will meet maybe 80% of my wants (<em>not needs</em>), but against Zipf's Law, will cost me well more than 20% the average price for a smartphone in the US (if you base that on phones released in the US this year) which I'll say is about $800 right now. Might be a little lower, but whatever. $800. 20% of $800 is $160. <strong>Only $160.</strong> That's a little low so let's assume some margin of error and bump that to an even $200. There. Margin of error for everyone at multiple levels. I apologize if I've wildly misunderstood Zipf's Law but to be honest the numbers make sense to me.</p>
+
+      <p><strong>$200</strong> should get me the <strong>80%</strong> of features that I've consistently liked on all my devices, while compromising on the last 20%. And that last 20% may not exist at all. I've yet to find a phone that for even $800 meets 100% of my wants, and I believe it's unreasonable to expect that phone will ever exist since <em>my</em> 100% is subjective and seems to change frequently, based on what's available. It's a moving target that will never get hit.</p>
+
+      <p>I can stop right there because I already have a $209 phone that meets 80% of my wants. But, it actually isn't a $209 phone, it's a $580 phone. So that's an unfair statement.</p>
+
+      <h3 id="thetrue80androidphones">The True "80%" Android Phones</h3>
+
+      <p>I've recently purchased another phone. Yup. ANOTHER ONE. Why, when I already have a $580 phone that I got for $209? Because this phone is sold brand new at $129. There are a ton of these cheaper smartphones on the market. One of the larger brands is BLU. BLU recently released a <a href="https://www.youtube.com/watch?v=DB8Gttoqsl8">$350 phone</a> that is very similar to a Galaxy Note 5, without the stylus. </p>
+
+      <p>BLU is competing with an $800 device by putting out a $350 device that has more than 80% of the features. While personally I think the cap for budget phones should be $300, $350 is pretty close and I think we'll be seeing more "80%" phones in the coming months closer to that $200 line. Some brands have hit that mark already, like Asus and their <a href="https://www.youtube.com/watch?v=8Yz4miS6N9Q">Zenfone 2</a> (which I might end up settling on because let's be honest, $129 is a little <em>too</em> good to be true, but we'll see).</p>
+
+      <p>This is why I don't believe there is any reason to spend $600+ for a device that you'll inevitably be only 80% satisfied with. Especially if you can get that same 80% by spending a fraction of the price. Yes I know most of that cost is marketing costs but I don't agree to that being a reason we have to foot the bill. I believe in giving the quiet manufacturers a chance.</p>
+
+      <h3 id="whytheiphoneisactuallyagooddeal">Why the iPhone is actually a good deal</h3>
+
+      <p>The Apple iPhone doesn't appear to follow Zipf's Law. At first...</p>
+
+      <p>The current Apple iPhone 6S is $650 direct from Apple. It's not without it's share of issues but the device performance, lack of segmentation, available support via physical stores, and level of integration with the Apple ecosystem makes this a totally different experience. You buy Apple to stay in Apple and their devices easily last two years due to excellent support of older devices to keep them current, above and beyond critical security patches.</p>
+
+      <p>If you average that out, you're spending $325 a year for your iPhone. <strong>It's going to last you those two years.</strong> Will a $300 Android last you two years? Absolutely not. Will a $600 Android? Maybe, but probably not. Most manufacturers stop patching within a year, some as quickly as six months, with Google's Nexus devices being an exception. My Galaxy S5 Active is only a year old and it's already been abandoned by Samsung.</p>
+
+      <p>The excellent integration of the Apple ecosystem along with the solid lifecycle support and balanced price means the iPhone is already very close to Zipf's Law.</p>
+
+      <h3 id="conclusion">Conclusion</h3>
+
+      <p>I don't expect this to be all that helpful to anyone but I've found the application of Zipf's Law very interesting (albeit possibly inaccurate with all my admittedly ballpark figures) and being very useful in setting my expectations and understanding the choice between a $200-$300 Android and a $650 iPhone.</p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1443903387949'
+    - '1'
+    - '1443908488752'
+    - '1'
+    - '1443907535052'
+    - '1'
+  - - '26'
+    - f8b7faa3-9ab7-4bc6-be73-c97042ea1461
+    - NFS for Vagrant Synced Folders Sucks
+    - nfs-for-vagrant-synced-folders-sucks
+    - |+
+      I've been having a recurring problem of NFS and Vagrant not always syncing my changes, resulting in some _very_ annoying debugging. Usually in the wrong places before I realize what's going on, restart my server and discover I had fixed the problem an hour ago.
+
+      I went off to find some alternatives, the first being rsync which seemed promising at first but very quickly I realized it was not a good fit for my development environment. Specifically, I needed to be able to run bundle within Vagrant and then commit the resulting lock file in my host environment so 2-way sync is a must. Yes there's some work to try and get rsync to work with 2-way sync but it's not really that easy to get going and remains a (hefty) [open issue](https://github.com/mitchellh/vagrant/issues/3062).
+
+      __Enter: unison__
+
+      Credit goes to https://keylocation.sg/blog/vagrant-and-unison-without-a-plugin/ for getting me started.
+
+      First, update your Vagrantfile:
+
+      ```
+      config.vm.synced_folder '.', '/vagrant', disabled: true
+      ```
+
+      Then, within your Vagrant machine, as su (not just sudo; this assumes Ubuntu/Debian image):
+
+      ```
+      sudo curl -sL http://mirrors.kernel.org/archlinux/extra/os/x86_64/unison-2.48.3-2-x86_64.pkg.tar.xz | tar Jx
+      ```
+
+      Exit your VM, halt it, and then up it.
+
+      On host machine (OS X, in my case):
+
+      ```
+      brew install unison
+      ```
+
+      Ensure that the VM version of unison matches your host machine version of unison (__2.48.3__ as of this guide).
+
+      Put this script somewhere in your development path and __chmod +x__ it:
+
+      ```
+      #!/usr/bin/env bash
+
+      # create ssh-config file
+      ssh_config="$PWD/.vagrant/ssh-config"
+      vagrant ssh-config > "$ssh_config"
+
+      # create unison profile
+      profile="
+      root = .
+      root = ssh://your-vm-hostname//vagrant/
+      ignore = Name {.git,.vagrant}
+
+      prefer = .
+      repeat = 2
+      terse = true
+      dontchmod = true
+      perms = 0
+      sshargs = -F $ssh_config
+      "
+
+      # write profile
+
+      if [ -z ${USERPROFILE+x} ]; then
+        UNISONDIR=$HOME
+      else
+        UNISONDIR=$USERPROFILE
+      fi
+
+      cd $UNISONDIR
+      [ -d .unison ] || mkdir .unison
+      echo "$profile" > .unison/myproject.prf
+      ```
+
+      Check .vagrant/ssh-config for the right ssh host name to use, replacing __your-vm-hostname__.
+
+      Vagrant up your VM then on your host (typically a new terminal) run:
+
+      ```
+      unison myproject
+      ```
+
+      __myproject__ is the filename of the prf profile to use. Feel free to name the file something more meaningful, like your project name or your repo name.
+
+      The unison server stays open so you'll have to leave it running. Ctrl-C will quit.
+
+      Some final notes:
+
+      __Pros:__
+
+      * Doesn't require root or sudo to work (NFS does since it modifies your /etc/exports file which is protected)
+      * Doesn't muck up your /etc/exports file
+      * Works on all platforms, including Windows (https://www.cis.upenn.edu/~bcpierce/unison/)
+      * 2-way sync
+      * Quick change detection
+      * Visible detection of changes and sync results to STDOUT so you know exactly what got synced and if anything failed
+
+      __Cons:__
+
+      * Config file gets overwritten for each app, assuming you didn't name it after your project. __Highly recommend you do so you can just__ unison project-name __to run the service.__
+      * Requires another open window (at least in this style; could probably be daemonized with output redirecting to a log)
+
+      __Room for improvement:__
+
+      * Use scripts in the Vagrantfile to configure unison so it can live in your versioning system (if you commit your Vagrantfile)
+      * Daemonize the service in a re-usable manner. Frequently I have to hop between four to five projects in a day and it would be just _fantastic_ if I didn't have to halt/up each one every time and relaunch unison.
+
+    - "<p>I've been having a recurring problem of NFS and Vagrant not always syncing
+      my changes, resulting in some <em>very</em> annoying debugging. Usually in the
+      wrong places before I realize what's going on, restart my server and discover
+      I had fixed the problem an hour ago.</p>\n\n<p>I went off to find some alternatives,
+      the first being rsync which seemed promising at first but very quickly I realized
+      it was not a good fit for my development environment. Specifically, I needed to
+      be able to run bundle within Vagrant and then commit the resulting lock file in
+      my host environment so 2-way sync is a must. Yes there's some work to try and
+      get rsync to work with 2-way sync but it's not really that easy to get going and
+      remains a (hefty) <a href=\"https://github.com/mitchellh/vagrant/issues/3062\">open
+      issue</a>.</p>\n\n<p><strong>Enter: unison</strong></p>\n\n<p>Credit goes to <a
+      href='https://keylocation.sg/blog/vagrant-and-unison-without-a-plugin/'>https://keylocation.sg/blog/vagrant-and-unison-without-a-plugin/</a>
+      for getting me started.</p>\n\n<p>First, update your Vagrantfile:</p>\n\n<pre><code>config.vm.synced_folder
+      '.', '/vagrant', disabled: true  \n</code></pre>\n\n<p>Then, within your Vagrant
+      machine, as su (not just sudo; this assumes Ubuntu/Debian image):</p>\n\n<pre><code>sudo
+      curl -sL http://mirrors.kernel.org/archlinux/extra/os/x86_64/unison-2.48.3-2-x86_64.pkg.tar.xz
+      | tar Jx  \n</code></pre>\n\n<p>Exit your VM, halt it, and then up it.</p>\n\n<p>On
+      host machine (OS X, in my case):</p>\n\n<pre><code>brew install unison  \n</code></pre>\n\n<p>Ensure
+      that the VM version of unison matches your host machine version of unison (<strong>2.48.3</strong>
+      as of this guide).</p>\n\n<p>Put this script somewhere in your development path
+      and <strong>chmod +x</strong> it:</p>\n\n<pre><code>#!/usr/bin/env bash\n\n# create
+      ssh-config file\nssh_config=\"$PWD/.vagrant/ssh-config\"  \nvagrant ssh-config
+      &gt; \"$ssh_config\"\n\n# create unison profile\nprofile=\"  \nroot = .  \nroot
+      = ssh://your-vm-hostname//vagrant/  \nignore = Name {.git,.vagrant}\n\nprefer
+      = .  \nrepeat = 2  \nterse = true  \ndontchmod = true  \nperms = 0  \nsshargs
+      = -F $ssh_config  \n\"\n\n# write profile\n\nif [ -z ${USERPROFILE+x} ]; then
+      \ \n  UNISONDIR=$HOME\nelse  \n  UNISONDIR=$USERPROFILE\nfi\n\ncd $UNISONDIR  \n[
+      -d .unison ] || mkdir .unison\necho \"$profile\" &gt; .unison/myproject.prf  \n</code></pre>\n\n<p>Check
+      .vagrant/ssh-config for the right ssh host name to use, replacing <strong>your-vm-hostname</strong>.</p>\n\n<p>Vagrant
+      up your VM then on your host (typically a new terminal) run:</p>\n\n<pre><code>unison
+      myproject  \n</code></pre>\n\n<p><strong>myproject</strong> is the filename of
+      the prf profile to use. Feel free to name the file something more meaningful,
+      like your project name or your repo name.</p>\n\n<p>The unison server stays open
+      so you'll have to leave it running. Ctrl-C will quit.</p>\n\n<p>Some final notes:</p>\n\n<p><strong>Pros:</strong></p>\n\n<ul>\n<li>Doesn't
+      require root or sudo to work (NFS does since it modifies your /etc/exports file
+      which is protected)</li>\n<li>Doesn't muck up your /etc/exports file</li>\n<li>Works
+      on all platforms, including Windows (<a href='https://www.cis.upenn.edu/~bcpierce/unison/'>https://www.cis.upenn.edu/~bcpierce/unison/</a>)</li>\n<li>2-way
+      sync</li>\n<li>Quick change detection</li>\n<li>Visible detection of changes and
+      sync results to STDOUT so you know exactly what got synced and if anything failed</li>\n</ul>\n\n<p><strong>Cons:</strong></p>\n\n<ul>\n<li>Config
+      file gets overwritten for each app, assuming you didn't name it after your project.
+      <strong>Highly recommend you do so you can just</strong> unison project-name <strong>to
+      run the service.</strong></li>\n<li>Requires another open window (at least in
+      this style; could probably be daemonized with output redirecting to a log)</li>\n</ul>\n\n<p><strong>Room
+      for improvement:</strong></p>\n\n<ul>\n<li>Use scripts in the Vagrantfile to configure
+      unison so it can live in your versioning system (if you commit your Vagrantfile)</li>\n<li>Daemonize
+      the service in a re-usable manner. Frequently I have to hop between four to five
+      projects in a day and it would be just <em>fantastic</em> if I didn't have to
+      halt/up each one every time and relaunch unison.</li>\n</ul>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1452745571398'
+    - '1'
+    - '1452752142392'
+    - '1'
+    - '1452751579234'
+    - '1'
+  - - '27'
+    - 998a5239-9053-4191-8280-4657e006ec77
+    - Using Optimized SQL Where Appropriate
+    - using-optimized-sql-where-appropriate
+    - |-
+      Recently wrote a Rails app that takes in a 20 question survey, does a bunch of weight math, and plots the results along with averages from other people who took the survey.
+
+      Initially it was fast when processing only ~10-20 surveys, but once we loaded the seed data (100 surveys, at 20 questions each equaling about 2,000 lines of data to perform averaging and converting into two different graphs, one 2D another 5D) it slowed down to about 5-10 seconds per page load.
+
+      Investigating the problem revealed it was due to the many DB calls because of our N3F database design:
+
+      * Answers belonged to a user and to a question and to a survey.
+      * Weights were stored in the Questions to ensure any changes to weights would be universal and not skew new answers vs old.
+      * Weights vary per dimension which belonged to Question.
+
+      So in order to grab everything knowing only the current Survey, I had: __Survey -> Answer -> Question -> Dimension__. _That's four levels deep._
+
+      ActiveRecord breaks down after _two_, so some of the data collection was happening with extra DB calls in loops. That's very expensive and slow.
+
+      Two possible solutions I considered:
+
+      1. __Cache the results.__ I would have to cache the total and the answer counts for the 2D/5D graphs in order to be able to recalculate averages. Initial calculation would be time consuming but new data would be relatively fast. This would keep the inefficient DB requests and code would remain the same but would make more use of native Rails' methods and would be more maintainable in the long run (assuming whoever takes over knows Rails but no SQL) and wouldn't rely on a specific database technology (PostgreSQL in our case). Or...
+      1. Implement custom DB-specific SQL queries to perform the complex joins and data formatting to make the calculations that happen in Rails much simpler, or at least hit the database and load fewer ActiveModels into memory. The risk here is it's harder to maintain/read and would be hard-coded to a specific DB technology but the code would be much more efficient.
+
+      I ended up going with the more efficient queries as I personally don't like slow code in production, even if it means it's more universal and since we run on VPS rather than a PaaS we have full control over the environment so I could ensure the DB technology wouldn't change without me knowing. Plus PostgresSQL is just _awesome_.
+
+      The SQL statement for the 5D graph ended up looking like this:
+
+      ```
+      SELECT "answers"."weight" AS "answer_weight", "dimensions"."name" AS "dimension" FROM "answers" INNER JOIN "questionaires" ON "questionaires"."id" = "answers"."questionaire_id" INNER JOIN "questions" ON "questions"."id" = "answers"."question_id" INNER JOIN "dimensions_questions" ON "dimensions_questions"."question_id" = "questions"."id" INNER JOIN "dimensions" ON "dimensions_questions"."dimension_id" = "dimensions"."id" WHERE "dimensions"."grouping" = $1 AND "questionaires"."id" = $2
+      ```
+
+      What this gave me was a simple 2-column view with weights and dimension names which I could then use in a simple, one level loop to build a hash of arrays. From there it's a cheap list average.
+
+      To further improve performance, I made use of prepared statements which essentially caches a SQL statement containing variables ($1 and $2 above) that you can then call like a function with arguments. I put this in an initializer:
+
+      ```
+      connection = ActiveRecord::Base.connection.raw_connection
+      query = "the above query here"
+      stored_query_name = "somename"
+
+      begin
+        connection.prepare stored_query_name, query
+      rescue PG::DuplicatePstatement => e
+        begin; connection.exec("DEALLOCATE #{stored_query_name}"); rescue; end
+        connection.prepare stored_query_name, query
+      end
+      ```
+
+      Then use it in the app with:
+
+      ```
+      connection = ActiveRecord::Base.connection.raw_connection
+      results = connection.exec_prepared(stored_query_name, [arg1, arg2]).to_a
+      ```
+
+      __results__ will contain an array with results or will be an empty array if no results were found.
+
+      Using SQL like this I was able to bring the request time down from 5-10 seconds back to under 200ms.
+
+      I'm no optimization expert, and I'm sure there may have been more Rails/ActiveRecord/Ruby-centric methods to improve on the request but I was having so much trouble getting ActiveRecord to build the request I needed that I gave up and wrote it myself.
+
+      As a sidenote, another DB-specific feature to improve performance are DB views. These are SQL statements stored in the database that emulate tables but dynamically update themselves when data in the source tables changes. I'll write something about those another time as they don't accept arguments like the prepared statements can.
+
+      Update: Hah. I already did apparently: http://rdkl.us/database-views-simplify-legacy-models/
+    - "<p>Recently wrote a Rails app that takes in a 20 question survey, does a bunch
+      of weight math, and plots the results along with averages from other people who
+      took the survey.</p>\n\n<p>Initially it was fast when processing only ~10-20 surveys,
+      but once we loaded the seed data (100 surveys, at 20 questions each equaling about
+      2,000 lines of data to perform averaging and converting into two different graphs,
+      one 2D another 5D) it slowed down to about 5-10 seconds per page load.</p>\n\n<p>Investigating
+      the problem revealed it was due to the many DB calls because of our N3F database
+      design:</p>\n\n<ul>\n<li>Answers belonged to a user and to a question and to a
+      survey.</li>\n<li>Weights were stored in the Questions to ensure any changes to
+      weights would be universal and not skew new answers vs old.</li>\n<li>Weights
+      vary per dimension which belonged to Question.</li>\n</ul>\n\n<p>So in order to
+      grab everything knowing only the current Survey, I had: <strong>Survey -> Answer
+      -> Question -> Dimension</strong>. <em>That's four levels deep.</em></p>\n\n<p>ActiveRecord
+      breaks down after <em>two</em>, so some of the data collection was happening with
+      extra DB calls in loops. That's very expensive and slow.</p>\n\n<p>Two possible
+      solutions I considered:</p>\n\n<ol>\n<li><strong>Cache the results.</strong> I
+      would have to cache the total and the answer counts for the 2D/5D graphs in order
+      to be able to recalculate averages. Initial calculation would be time consuming
+      but new data would be relatively fast. This would keep the inefficient DB requests
+      and code would remain the same but would make more use of native Rails' methods
+      and would be more maintainable in the long run (assuming whoever takes over knows
+      Rails but no SQL) and wouldn't rely on a specific database technology (PostgreSQL
+      in our case). Or...  </li>\n<li>Implement custom DB-specific SQL queries to perform
+      the complex joins and data formatting to make the calculations that happen in
+      Rails much simpler, or at least hit the database and load fewer ActiveModels into
+      memory. The risk here is it's harder to maintain/read and would be hard-coded
+      to a specific DB technology but the code would be much more efficient.</li>\n</ol>\n\n<p>I
+      ended up going with the more efficient queries as I personally don't like slow
+      code in production, even if it means it's more universal and since we run on VPS
+      rather than a PaaS we have full control over the environment so I could ensure
+      the DB technology wouldn't change without me knowing. Plus PostgresSQL is just
+      <em>awesome</em>.</p>\n\n<p>The SQL statement for the 5D graph ended up looking
+      like this:</p>\n\n<pre><code>SELECT \"answers\".\"weight\" AS \"answer_weight\",
+      \"dimensions\".\"name\" AS \"dimension\" FROM \"answers\" INNER JOIN \"questionaires\"
+      ON \"questionaires\".\"id\" = \"answers\".\"questionaire_id\" INNER JOIN \"questions\"
+      ON \"questions\".\"id\" = \"answers\".\"question_id\" INNER JOIN \"dimensions_questions\"
+      ON \"dimensions_questions\".\"question_id\" = \"questions\".\"id\" INNER JOIN
+      \"dimensions\" ON \"dimensions_questions\".\"dimension_id\" = \"dimensions\".\"id\"
+      WHERE \"dimensions\".\"grouping\" = $1 AND \"questionaires\".\"id\" = $2  \n</code></pre>\n\n<p>What
+      this gave me was a simple 2-column view with weights and dimension names which
+      I could then use in a simple, one level loop to build a hash of arrays. From there
+      it's a cheap list average.</p>\n\n<p>To further improve performance, I made use
+      of prepared statements which essentially caches a SQL statement containing variables
+      ($1 and $2 above) that you can then call like a function with arguments. I put
+      this in an initializer:</p>\n\n<pre><code>connection = ActiveRecord::Base.connection.raw_connection
+      \ \nquery = \"the above query here\"  \nstored_query_name = \"somename\"\n\nbegin
+      \ \n  connection.prepare stored_query_name, query\nrescue PG::DuplicatePstatement
+      =&gt; e  \n  begin; connection.exec(\"DEALLOCATE #{stored_query_name}\"); rescue;
+      end\n  connection.prepare stored_query_name, query\nend  \n</code></pre>\n\n<p>Then
+      use it in the app with:</p>\n\n<pre><code>connection = ActiveRecord::Base.connection.raw_connection
+      \ \nresults = connection.exec_prepared(stored_query_name, [arg1, arg2]).to_a  \n</code></pre>\n\n<p><strong>results</strong>
+      will contain an array with results or will be an empty array if no results were
+      found.</p>\n\n<p>Using SQL like this I was able to bring the request time down
+      from 5-10 seconds back to under 200ms.</p>\n\n<p>I'm no optimization expert, and
+      I'm sure there may have been more Rails/ActiveRecord/Ruby-centric methods to improve
+      on the request but I was having so much trouble getting ActiveRecord to build
+      the request I needed that I gave up and wrote it myself.</p>\n\n<p>As a sidenote,
+      another DB-specific feature to improve performance are DB views. These are SQL
+      statements stored in the database that emulate tables but dynamically update themselves
+      when data in the source tables changes. I'll write something about those another
+      time as they don't accept arguments like the prepared statements can.</p>\n\n<p>Update:
+      Hah. I already did apparently: <a href='http://rdkl.us/database-views-simplify-legacy-models/'>http://rdkl.us/database-views-simplify-legacy-models/</a></p>"
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1452752651581'
+    - '1'
+    - '1452753194428'
+    - '1'
+    - '1452752657429'
+    - '1'
+  - - '28'
+    - 1ea60b3a-7000-4232-a5c6-34c425dc093a
+    - 'Quickie: Don''t bother with PostgreSQL hstore - use json'
+    - quickie-dont-bother-with-postgresql-hstore-use-json
+    - |-
+      A while ago I wrote that [using hstore in PostgreSQL was awesome](http://blog.rdkl.us/use-hstore-for-handling-flexible-fields/) but now that PostreSQL 9.1 has been out (for a while) and the JSON data type has native support, forget that junk!
+
+      The JSON format is much, _much_ more flexible and helpful for schemaless data. In some rare cases you do have to parse it manually (e.x., if you make use of prepared statements or database views) but that's a small price to pay.
+
+      That's it! More of a PSA or errata, I suppose... __Don't bother with hstore. Use JSON!__
+    - |-
+      <p>A while ago I wrote that <a href="http://blog.rdkl.us/use-hstore-for-handling-flexible-fields/">using hstore in PostgreSQL was awesome</a> but now that PostreSQL 9.1 has been out (for a while) and the JSON data type has native support, forget that junk!</p>
+
+      <p>The JSON format is much, <em>much</em> more flexible and helpful for schemaless data. In some rare cases you do have to parse it manually (e.x., if you make use of prepared statements or database views) but that's a small price to pay.</p>
+
+      <p>That's it! More of a PSA or errata, I suppose... <strong>Don't bother with hstore. Use JSON!</strong></p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1452753487788'
+    - '1'
+    - '1452753588945'
+    - '1'
+    - '1452753588946'
+    - '1'
+  - - '29'
+    - 7d0feb41-2854-4b4f-b9ed-9b6ae1c521ac
+    - Setting up the Wio Link
+    - setting-up-the-wio-link
+    - |
+      **UPDATE 2:**
+
+      I've written a very basic AngularJS app to configure the ports on my Wio Link until the app gets an official update that allows you to use something other than an ip address and HTTPS. My web app lets you enter an arbitrary URL to connect to: https://github.com/retro486/weeboowio
+
+      ---
+
+      **UPDATE:**
+
+      Seeed has a very nice API documentation site:
+      http://seeed-studio.github.io/Wio_Link/
+
+      ---
+
+      **Original article:**
+
+      When I first got my Wio Link Deluxe Plus Kit from Seeed's Kickstarter, I quickly learned the setup instructions on their page didn't work for me.
+
+      I saw that while their instructions say to use their app to initially configure the Wio Link, they also suggest using wio-cli for initial setup. But even that would get stuck at **Sending Wi-Fi information to device...** for me.
+
+      **Long story short, here's how I got mine working:**
+
+      **Note:** I couldn't get Python on Windows to work so I stopped trying and used my Macbook Air instead but if all you have is Windows then you need to make sure your setup can make use of pip. If you don't know what that is, then do some Googling for "python windows pip" and good luck!
+
+      1. Sign up for an account on Seeed's servers or [set up your own server](https://github.com/Seeed-Studio/Wio_Link/wiki/Server%20Deployment%20Guide). If using Seeed's servers, follow these instructions step 1 and 2. Don't bother with step 3 and up right now:
+      https://iot.seeed.cc/getting_started.html
+
+      1. Download and install the USB drivers **before** plugging a Wio Link into your computer:
+      https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx
+
+      1. Install the wio-cli toolkit: ```pip install wio-cli```
+
+      1. Plug your Wio Link into your computer with the provided USB cable. You should see a variety of lights blinking/flashing.
+
+      1. Look closely at the two buttons to the left of the battery plug and to the right of the USB port. One is labelled **CONFIG** and one labeled **RESET**.
+
+      1. Press and hold **CONFIG** for **4 seconds** then let go. You may not see any change on the board lights, but some report the blue LED starts "breathing" instead of just blinking.
+
+      1. Open a terminal/console and enter: ```wio login```
+
+      1. Enter your server (if you're hosting) or select Seeed's server if you went that route, and enter your username and password.
+
+      1. Once back at the console, enter ```wio setup```
+
+      1. Follow the instructions until you hit a part that says **No nearby Wiolink detected. Would you like to wait and monitor for Wiolink entering configure mode [Y/n]:**
+
+      1. Enter **n** for no.
+
+      1. Now you should see **Would you like to manually enter your Wi-Fi network configuration? [y/N]:**
+
+      1. Enter **y** for yes.
+
+      1. Enter your wifi ssid and password when prompted. Note that wio doesn't support non-engish characters in the ssid, and supports only WPA/WPA2 Personal.
+
+      1. Enter a helpful name for the device. You'll probably want to put a sticker on the board to help you differentiate them later from the IFTTT app (or the Wio Link SDK).
+
+      1. Confirm the information and enter **y** to save your settings.
+
+      1. Now your terminal will appear to get stuck at **Sending Wi-Fi information to device...**
+
+      1. Press the **RESET** button once.
+
+      1. Press and hold the **CONFIG** button for **4 seconds** then release it.
+
+      1. You should see the prompt immediately move on to **end Wi-Fi information to device success.**. If it doesn't, keep trying the reset+config process but **do not remove the USB cable or cancel the process**.
+
+      1. The Wio Link will now test out the connection. If all goes well, it should succeed and kick you out to the shell. If it says it couldn't connect to your server, double check your settings and try again.
+
+      If you're using one of Seeed's servers (the app does have basic support for private servers but only if the wio server is using SSL on port 443 of your IP address), you can open the Wio app and log in with the same server/credentials that you sent to your Wio Link and you should see your board in the list as **online**. You can now drag-and-drop modules from the lower bar into their ports on the Wio link graphic in the app and tap **UPDATE** to send the new config to your Wio.
+
+      If your wifi info changes and you need to reconfigure your Wio Links, follow the exact same setup steps.
+
+      You can now use the RESTful API at Seeed's (or your own if you set it up) server using the available APIs at Seeed's Grove wiki: http://www.seeedstudio.com/wiki/Category:Grove
+
+      And/or you can use **If This Then That** (http://ifttt.com) and use the **Seeed channel** to link your account and access the Wio Link and its sensors.
+
+      If you want to set up your own Wio Link server (as suggested by Seeed since they don't plan on maintaining their own servers for very long): https://github.com/Seeed-Studio/Wio_Link/wiki/Server%20Deployment%20Guide
+    - |-
+      <p><strong>UPDATE 2:</strong></p>
+
+      <p>I've written a very basic AngularJS app to configure the ports on my Wio Link until the app gets an official update that allows you to use something other than an ip address and HTTPS. My web app lets you enter an arbitrary URL to connect to: <a href='https://github.com/retro486/weeboowio'>https://github.com/retro486/weeboowio</a></p>
+
+      <hr />
+
+      <p><strong>UPDATE:</strong></p>
+
+      <p>Seeed has a very nice API documentation site: <br />
+      <a href='http://seeed-studio.github.io/Wio_Link/'>http://seeed-studio.github.io/Wio_Link/</a></p>
+
+      <hr />
+
+      <p><strong>Original article:</strong></p>
+
+      <p>When I first got my Wio Link Deluxe Plus Kit from Seeed's Kickstarter, I quickly learned the setup instructions on their page didn't work for me.</p>
+
+      <p>I saw that while their instructions say to use their app to initially configure the Wio Link, they also suggest using wio-cli for initial setup. But even that would get stuck at <strong>Sending Wi-Fi information to device...</strong> for me.</p>
+
+      <p><strong>Long story short, here's how I got mine working:</strong></p>
+
+      <p><strong>Note:</strong> I couldn't get Python on Windows to work so I stopped trying and used my Macbook Air instead but if all you have is Windows then you need to make sure your setup can make use of pip. If you don't know what that is, then do some Googling for "python windows pip" and good luck!</p>
+
+      <ol>
+      <li><p>Sign up for an account on Seeed's servers or <a href="https://github.com/Seeed-Studio/Wio_Link/wiki/Server%20Deployment%20Guide">set up your own server</a>. If using Seeed's servers, follow these instructions step 1 and 2. Don't bother with step 3 and up right now: <br />
+      <a href='https://iot.seeed.cc/getting_started.html'>https://iot.seeed.cc/getting_started.html</a></p></li>
+      <li><p>Download and install the USB drivers <strong>before</strong> plugging a Wio Link into your computer: <br />
+      <a href='https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx'>https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx</a></p></li>
+      <li><p>Install the wio-cli toolkit: <code>pip install wio-cli</code></p></li>
+      <li><p>Plug your Wio Link into your computer with the provided USB cable. You should see a variety of lights blinking/flashing.</p></li>
+      <li><p>Look closely at the two buttons to the left of the battery plug and to the right of the USB port. One is labelled <strong>CONFIG</strong> and one labeled <strong>RESET</strong>.</p></li>
+      <li><p>Press and hold <strong>CONFIG</strong> for <strong>4 seconds</strong> then let go. You may not see any change on the board lights, but some report the blue LED starts "breathing" instead of just blinking.</p></li>
+      <li><p>Open a terminal/console and enter: <code>wio login</code></p></li>
+      <li><p>Enter your server (if you're hosting) or select Seeed's server if you went that route, and enter your username and password.</p></li>
+      <li><p>Once back at the console, enter <code>wio setup</code></p></li>
+      <li><p>Follow the instructions until you hit a part that says <strong>No nearby Wiolink detected. Would you like to wait and monitor for Wiolink entering configure mode [Y/n]:</strong></p></li>
+      <li><p>Enter <strong>n</strong> for no.</p></li>
+      <li><p>Now you should see <strong>Would you like to manually enter your Wi-Fi network configuration? [y/N]:</strong></p></li>
+      <li><p>Enter <strong>y</strong> for yes.</p></li>
+      <li><p>Enter your wifi ssid and password when prompted. Note that wio doesn't support non-engish characters in the ssid, and supports only WPA/WPA2 Personal.</p></li>
+      <li><p>Enter a helpful name for the device. You'll probably want to put a sticker on the board to help you differentiate them later from the IFTTT app (or the Wio Link SDK).</p></li>
+      <li><p>Confirm the information and enter <strong>y</strong> to save your settings.</p></li>
+      <li><p>Now your terminal will appear to get stuck at <strong>Sending Wi-Fi information to device...</strong></p></li>
+      <li><p>Press the <strong>RESET</strong> button once.</p></li>
+      <li><p>Press and hold the <strong>CONFIG</strong> button for <strong>4 seconds</strong> then release it.</p></li>
+      <li><p>You should see the prompt immediately move on to <strong>end Wi-Fi information to device success.</strong>. If it doesn't, keep trying the reset+config process but <strong>do not remove the USB cable or cancel the process</strong>.</p></li>
+      <li><p>The Wio Link will now test out the connection. If all goes well, it should succeed and kick you out to the shell. If it says it couldn't connect to your server, double check your settings and try again.</p></li>
+      </ol>
+
+      <p>If you're using one of Seeed's servers (the app does have basic support for private servers but only if the wio server is using SSL on port 443 of your IP address), you can open the Wio app and log in with the same server/credentials that you sent to your Wio Link and you should see your board in the list as <strong>online</strong>. You can now drag-and-drop modules from the lower bar into their ports on the Wio link graphic in the app and tap <strong>UPDATE</strong> to send the new config to your Wio.</p>
+
+      <p>If your wifi info changes and you need to reconfigure your Wio Links, follow the exact same setup steps.</p>
+
+      <p>You can now use the RESTful API at Seeed's (or your own if you set it up) server using the available APIs at Seeed's Grove wiki: <a href='http://www.seeedstudio.com/wiki/Category:Grove'>http://www.seeedstudio.com/wiki/Category:Grove</a></p>
+
+      <p>And/or you can use <strong>If This Then That</strong> (<a href='http://ifttt.com'>http://ifttt.com</a>) and use the <strong>Seeed channel</strong> to link your account and access the Wio Link and its sensors.</p>
+
+      <p>If you want to set up your own Wio Link server (as suggested by Seeed since they don't plan on maintaining their own servers for very long): <a href='https://github.com/Seeed-Studio/Wio_Link/wiki/Server%20Deployment%20Guide'>https://github.com/Seeed-Studio/Wio_Link/wiki/Server%20Deployment%20Guide</a></p>
+    - 
+    - '0'
+    - '0'
+    - published
+    - en_US
+    - 
+    - 
+    - '1'
+    - '1460835254410'
+    - '1'
+    - '1461298612907'
+    - '1'
+    - '1460835257784'
+    - '1'
